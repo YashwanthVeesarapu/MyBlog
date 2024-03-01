@@ -1,0 +1,21 @@
+.about {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+
+  h2,
+  h3 {
+    color: #3498db;
+  }
+
+  h3 {
+    margin-top: 20px;
+  }
+
+  p {
+    margin-bottom: 15px;
+  }
+}

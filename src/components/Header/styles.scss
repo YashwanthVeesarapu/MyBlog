@@ -1,0 +1,31 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+  height: var(--header-height);
+  align-items: center;
+  margin: 0 10px;
+
+  h1,
+  a {
+    font-family: BR;
+    text-transform: lowercase;
+    font-weight: 100;
+    font-size: 2em;
+  }
+  div {
+    display: flex;
+    flex: 1;
+  }
+
+  .middle {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .right {
+    justify-content: flex-end;
+  }
+}
