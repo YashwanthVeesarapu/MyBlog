@@ -139,7 +139,14 @@ const Admin = () => {
           </button>
 
           <div className="blog-container">
-            <Button onClick={() => setOpenCreateModal(true)}>
+            <Button
+              onClick={() => {
+                setOpenCreateModal(true);
+                setTitle("");
+                setDescription("");
+                setInfo("");
+              }}
+            >
               Create Blog
             </Button>
 
