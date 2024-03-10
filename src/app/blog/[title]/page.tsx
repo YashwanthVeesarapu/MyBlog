@@ -2,7 +2,6 @@ import MainLayout from "@/layouts/MainLayout";
 import { apiInstance } from "../../../utils/apiInstance";
 import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
-import { title } from "process";
 
 export async function generateStaticParams() {
   let url = apiInstance.getUri() + "blogs";
@@ -13,11 +12,12 @@ export async function generateStaticParams() {
   return data.map((blog: any) => ({
     title: blog.title.split(" ").join("-"),
     description: blog.description,
+    info: blog.info,
   }));
 }
 
 type Props = {
-  params: { title: string; description: string };
+  params: { title: string; description: string; info: string };
 };
 
 export async function generateMetadata(
@@ -38,8 +38,7 @@ export async function generateMetadata(
 
 export default async function page({ params }: any) {
   let url = apiInstance.getUri() + `blogs/${params.title}`;
-
-  let blog: any = await fetch(url, { cache: "no-store" });
+  let blog: any = await fetch(url, { next: { revalidate: 3600 } });
   const data = await blog.json();
 
   return (
