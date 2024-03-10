@@ -39,7 +39,7 @@ export async function generateMetadata(
 export default async function page({ params }: any) {
   let url = apiInstance.getUri() + `blogs/${params.title}`;
 
-  let blog: any = await fetch(url);
+  let blog: any = await fetch(url, { cache: "no-store" });
   const data = await blog.json();
 
   return (

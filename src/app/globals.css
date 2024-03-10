@@ -48,6 +48,14 @@
   src: url("./../assets/br.TTF");
 }
 
+h2 {
+  margin: 10px;
+}
+
+li {
+  margin-top: 10px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -123,6 +131,27 @@ a {
 .blog h1 {
   text-transform: capitalize;
   margin: 20px 0;
+}
+
+.blog img {
+  width: 100%;
+}
+
+.code {
+  padding: 10px;
+  border: 2px solid rgb(var(--card-border-rgb), 0.2);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-self: center;
+  padding: 0.5em 1em;
+  margin: 0 1em;
+  margin-top: 10px;
+}
+
+.code p {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  width: fit-content;
 }
 
 @media (prefers-color-scheme: dark) {

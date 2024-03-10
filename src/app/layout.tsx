@@ -36,6 +36,12 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
       </Head>
       <body className={inter.className}>{children}</body>
+
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3789101350622146"
+        crossOrigin="anonymous"
+      ></script>
     </html>
   );
 }
