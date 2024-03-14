@@ -27,7 +27,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       let token = localUser.token;
       const payload = JSON.parse(atob(token.split(".")[1]));
 
-      if (payload.exp < (Date.now() / 1000) * 60 * 60 * 2) {
+      if (payload.exp < Date.now() / 1000 - 60 * 60 * 2) {
         localStorage.removeItem("user");
         localUser = null;
         setUser(null);
