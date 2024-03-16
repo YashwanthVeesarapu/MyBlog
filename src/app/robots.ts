@@ -4,8 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: "/",
-      disallow: "/private/",
+      disallow: "/admin/",
     },
     sitemap: "https://blog.redsols.us/sitemap.xml",
   };

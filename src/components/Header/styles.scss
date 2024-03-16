@@ -2,10 +2,13 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid var(--red);
   height: var(--header-height);
   align-items: center;
-  margin: 0 10px;
+  max-width: 1200px;
+  border-radius: 2em;
+  min-width: 700px;
+  padding: 0 6em;
 
   h1,
   a {
@@ -27,5 +30,13 @@ header {
 
   .right {
     justify-content: flex-end;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    padding: 0 2em;
+    width: 100%;
+    min-width: auto;
   }
 }

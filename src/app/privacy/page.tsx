@@ -1,10 +1,12 @@
 import MainLayout from "@/layouts/MainLayout";
 import React from "react";
 
+import "./styles.scss";
+
 const page = () => {
   return (
     <MainLayout>
-      <div>
+      <div className="privacy">
         <h1>Privacy Policy</h1>
 
         <p>

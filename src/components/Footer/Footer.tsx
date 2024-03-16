@@ -5,10 +5,15 @@ import Link from "next/link";
 const Footer: React.FC = () => {
   return (
     <footer>
-      <Link href="/about">About</Link>
-      <Link href="/privacy">Privacy Policy</Link>
-      <Link href="/contact">Contact</Link>
-      <Link href="/terms">Terms of Service</Link>
+      <div className="footer-top">
+        <Link href="/about">About</Link>
+        <Link href="/privacy">Privacy Policy</Link>
+        <Link href="/contact">Contact</Link>
+        <Link href="/terms">Terms of Service</Link>
+      </div>
+      <div className="footer-bottom">
+        <p>&copy; 2024 RedSols</p>
+      </div>
     </footer>
   );
 };

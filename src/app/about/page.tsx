@@ -30,6 +30,7 @@ const page = () => {
 
         <p>Thanks for visiting Redsols blog!</p>
 
+        <br />
         <h3>Contact Me</h3>
 
         <p>

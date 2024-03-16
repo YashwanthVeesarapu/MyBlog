@@ -1,10 +1,12 @@
 import MainLayout from "@/layouts/MainLayout";
 import React from "react";
 
+import "./styles.scss";
+
 const page = () => {
   return (
     <MainLayout>
-      <div>
+      <div className="terms">
         <h1>Terms of Service</h1>
         <p>
           By using our services, you agree to comply with and be bound by the

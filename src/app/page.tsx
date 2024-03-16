@@ -1,4 +1,4 @@
-import styles from "./page.module.scss";
+import "./page.scss";
 
 import MainLayout from "./../layouts/MainLayout";
 import { apiInstance } from "@/utils/apiInstance";
@@ -10,9 +10,9 @@ export default async function Home() {
 
   return (
     <MainLayout>
-      <div className={styles.description}>
+      <div className={"description"}>
         <p>Welcome to Blog by Redsols</p>
-        <div>
+        <div className="blogs">
           {data.map((element: Blog) => (
             <Link
               key={element.title}
@@ -21,6 +21,7 @@ export default async function Home() {
               {element.title}
             </Link>
           ))}
+          <div className="center"></div>
         </div>
       </div>
     </MainLayout>

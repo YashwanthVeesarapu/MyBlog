@@ -6,23 +6,18 @@
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
 
   --header-height: 50px;
   --footer-height: 40px;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
+  --red: #990000;
+  --primary-glow: radial-gradient(rgba(255, 1, 1, 0.4), rgba(255, 1, 1, 0));
+  --secondary-glow: linear-gradient(
+    to bottom right,
+    rgba(1, 65, 255, 0),
+    rgba(1, 65, 255, 0),
+    rgba(255, 1, 1, 0.3)
   );
 
   --tile-start-rgb: 239, 245, 249;
@@ -48,27 +43,11 @@
   src: url("./../assets/br.TTF");
 }
 
-h2 {
-  margin: 10px;
-}
-
-li {
-  margin-top: 10px;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
 
     --tile-start-rgb: 2, 13, 46;
     --tile-end-rgb: 2, 5, 19;
@@ -111,6 +90,14 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+h2 {
+  margin: 10px;
+}
+
+li {
+  margin-top: 10px;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -137,6 +124,10 @@ a {
   width: 100%;
 }
 
+.blog p {
+  margin-bottom: 10px;
+}
+
 .code {
   padding: 10px;
   border: 2px solid rgb(var(--card-border-rgb), 0.2);
@@ -152,6 +143,7 @@ a {
   font-family: var(--font-mono);
   font-size: 0.8em;
   width: fit-content;
+  margin-bottom: 10px;
 }
 
 @media (prefers-color-scheme: dark) {

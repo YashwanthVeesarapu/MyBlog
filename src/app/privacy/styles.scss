@@ -1,15 +1,22 @@
-.about {
+.privacy {
   min-width: 400px;
-  padding: 6em;
+  padding: 1em 6em;
   text-align: center;
   max-width: 1200px;
-  h2 {
+
+  h1 {
     font-size: 3em;
   }
-  h3 {
-    font-size: 2em;
-  }
+
   p {
     font-size: 1.5em;
+  }
+
+  a {
+    color: var(--red);
+  }
+
+  li {
+    list-style: none;
   }
 }

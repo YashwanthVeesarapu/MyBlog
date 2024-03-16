@@ -9,12 +9,14 @@ const Header = () => {
         <Link href={"/"}>Blog</Link>
       </div>
       <div className="middle">
+        {/* <Link target="_blank" href={"https://www.redsols.us/"}>
+          Redsols
+        </Link> */}
+      </div>
+      <div className="right">
         <Link target="_blank" href={"https://www.redsols.us/"}>
           Redsols
         </Link>
-      </div>
-      <div className="right">
-        <Link href={"/"}>Home</Link>
       </div>
     </header>
   );
