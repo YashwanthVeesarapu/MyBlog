@@ -7,8 +7,12 @@ footer {
   border-top: 1px solid var(--red);
   width: 100vw;
   height: 100%;
+
   .footer-top {
     padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .footer-bottom {
@@ -17,5 +21,17 @@ footer {
   }
   a {
     margin: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    .footer-top {
+      flex-direction: column;
+      align-items: center;
+      a {
+        margin: 5px;
+      }
+    }
   }
 }
