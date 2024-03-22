@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
         <Link href="/terms">Terms of Service</Link>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2024 RedSols</p>
+        <p>&copy; 2019 Redsols</p>
       </div>
     </footer>
   );
