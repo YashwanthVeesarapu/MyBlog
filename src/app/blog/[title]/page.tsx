@@ -42,10 +42,8 @@ export default async function page({ params }: any) {
   const data = await blog.json();
 
   return (
-    <MainLayout>
-      <div className="blog">
-        <div dangerouslySetInnerHTML={{ __html: data?.info || "" }} />
-      </div>
-    </MainLayout>
+    <div className="blog">
+      <div dangerouslySetInnerHTML={{ __html: data?.info || "" }} />
+    </div>
   );
 }

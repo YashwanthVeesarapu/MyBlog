@@ -5,6 +5,8 @@ import { apiInstance } from "@/utils/apiInstance";
 import Link from "next/link";
 import { Blog } from "@/models/blog.model";
 
+
+
 export default async function Home() {
   const data = await getData();
 

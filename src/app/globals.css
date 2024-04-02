@@ -115,6 +115,10 @@ a {
   list-style: none;
 }
 
+.blog li {
+  text-align: left;
+}
+
 .blog h1 {
   text-transform: capitalize;
   margin: 20px 0;
