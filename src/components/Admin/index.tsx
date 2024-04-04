@@ -11,6 +11,7 @@ import {
   TextareaAutosize,
 } from "@mui/material";
 import { headers } from "next/headers";
+import { set } from "firebase/database";
 
 const Admin = () => {
   const [blogs, setBlogs] = useState([]);
@@ -20,6 +21,7 @@ const Admin = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [info, setInfo] = useState("");
+  const [id, setId] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -39,11 +41,13 @@ const Admin = () => {
     e.preventDefault();
     setLoading(true);
 
+    let lowerCaseTitle = title.toLowerCase();
+
     apiInstance
       .post(
         "/blogs",
         {
-          title,
+          title: lowerCaseTitle,
           description,
           info,
         },
@@ -58,6 +62,10 @@ const Admin = () => {
         setTitle("");
         setDescription("");
         setInfo("");
+
+        fetchBlogs();
+
+        setOpenCreateModal(false);
       })
       .catch((e) => alert(e));
     setLoading(false);
@@ -73,7 +81,7 @@ const Admin = () => {
 
     await apiInstance
       .put(
-        `/blogs/${title.split(" ").join("-")}`,
+        `/blogs/${id}`,
         {
           title,
           description,
@@ -90,6 +98,10 @@ const Admin = () => {
         setTitle("");
         setDescription("");
         setInfo("");
+        setId("");
+
+        fetchBlogs();
+
         setOpenEditModal(false);
       })
       .catch((e) => alert(e));
@@ -117,6 +129,7 @@ const Admin = () => {
     setInfo(data.info);
     setTitle(data.title);
     setDescription(data.description);
+    setId(data._id);
 
     setOpenEditModal(true);
   };
@@ -246,6 +259,12 @@ const Admin = () => {
                 onChange={(e) => setTitle(e.target.value)}
               />
               <Input
+                type="hidden"
+                name="id"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+              />
+              <Input
                 name="description"
                 placeholder="Description"
                 onChange={(e) => setDescription(e.target.value)}
@@ -256,7 +275,6 @@ const Admin = () => {
                 onChange={(e) => setInfo(e.target.value)}
                 minRows={3}
               />
-
               {/* Submit Button */}
               <Button
                 variant={"contained"}
@@ -266,7 +284,6 @@ const Admin = () => {
               >
                 {loading ? <CircularProgress /> : "Submit"}
               </Button>
-
               <Button
                 variant={"contained"}
                 onClick={() => setOpenCreateModal(false)}

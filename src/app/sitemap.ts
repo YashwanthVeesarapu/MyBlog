@@ -1,7 +1,7 @@
 const SERVER_URL = "https://api.redash.us/blogs/";
 
 export default async function sitemap() {
-  const call = await fetch(SERVER_URL);
+  const call = await fetch(SERVER_URL, { next: { revalidate: 3600 } });
   const blogs = await call.json();
 
   const URL = "https://blog.redsols.us/";

@@ -123,6 +123,9 @@ a {
   text-transform: capitalize;
   margin: 20px 0;
 }
+.blog h2 {
+  margin: 10px 0;
+}
 
 .blog img {
   width: 100%;
@@ -142,6 +145,9 @@ a {
   padding: 0.5em 1em;
   margin: 0 1em;
   margin-top: 10px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.8em;
 }
 
 .code p {
@@ -149,6 +155,7 @@ a {
   font-size: 0.8em;
   width: fit-content;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 @media (prefers-color-scheme: dark) {

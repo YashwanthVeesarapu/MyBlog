@@ -6,6 +6,7 @@ let url = "https://api.redash.us/";
 // if (window.location.hostname === "localhost") {
 //   dev = true;
 // }
+
 // dev = true;
 
 if (dev) {
