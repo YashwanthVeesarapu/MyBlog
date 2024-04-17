@@ -8,11 +8,10 @@ const page = () => {
     <MainLayout>
       <div className="about">
         <h2>About</h2>
-        <h3>Hi, I&apos;m Yashwanth Veesarapu!</h3>
         <p>
           Greetings and welcome to Redsols Blog, your digital haven for
           insights, experiences, and inspiration. I&apos;m delighted to have you
-          here!{" "}
+          here!
         </p>
         <p>
           At Redsols, our aim is to simplify and enrich lives through valuable
@@ -20,7 +19,7 @@ const page = () => {
           it&apos;s navigating the ever-evolving landscape of technology,
           discovering daily life hacks for increased productivity, or delving
           into the world of software development, we&apos;re here to accompany
-          you on your journey.{" "}
+          you on your journey.
         </p>
 
         <p>
@@ -56,11 +55,11 @@ const page = () => {
         </p>
 
         <br />
-        <h3>Contact Me</h3>
+        <h3>Contact Us</h3>
 
         <p>
-          You can reach out to me via{" "}
-          <a href="mailto:yash@redsols.us">yash@redsols.us</a>. I&apos;m always
+          You can reach out to us via{" "}
+          <a href="mailto:blog@redsols.us">blog@redsols.us</a>. We are always
           open to collaborations, suggestions, and discussions.
         </p>
       </div>

@@ -6,6 +6,7 @@ footer {
   flex-direction: column;
   border-top: 1px solid var(--red);
   height: 100%;
+  font-family: TB;
 
   max-width: 1200px;
   border-radius: 2em;
@@ -23,7 +24,7 @@ footer {
     font-size: 0.8em;
   }
   a {
-    margin: 20px;
+    margin: 10px 20px;
   }
 }
 

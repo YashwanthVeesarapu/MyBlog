@@ -43,6 +43,11 @@
   src: url("./../assets/br.TTF");
 }
 
+@font-face {
+  font-family: TB;
+  src: url("./../assets/tb.ttf");
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

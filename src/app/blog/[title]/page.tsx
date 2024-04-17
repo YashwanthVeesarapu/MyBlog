@@ -38,7 +38,7 @@ export async function generateMetadata(
 
 export default async function page({ params }: any) {
   let url = apiInstance.getUri() + `blogs/${params.title}`;
-  let blog: any = await fetch(url, { next: { revalidate: 3600 } });
+  let blog: any = await fetch(url, { next: { revalidate: 1 } });
   const data = await blog.json();
 
   return (
