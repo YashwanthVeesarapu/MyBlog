@@ -65,6 +65,7 @@ const Admin = () => {
         setTitle("");
         setDescription("");
         setInfo("");
+        setAuthor("");
 
         fetchBlogs();
 
@@ -103,6 +104,7 @@ const Admin = () => {
         setDescription("");
         setInfo("");
         setId("");
+        setAuthor("");
 
         fetchBlogs();
 
@@ -134,7 +136,7 @@ const Admin = () => {
     setTitle(data.title);
     setDescription(data.description);
     setId(data._id);
-
+    setAuthor(data.author);
     setOpenEditModal(true);
   };
 
