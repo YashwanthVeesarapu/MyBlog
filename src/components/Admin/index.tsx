@@ -23,6 +23,8 @@ const Admin = () => {
   const [info, setInfo] = useState("");
   const [id, setId] = useState("");
 
+  const [author, setAuthor] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -50,6 +52,7 @@ const Admin = () => {
           title: lowerCaseTitle,
           description,
           info,
+          author,
         },
         {
           headers: {
@@ -86,6 +89,7 @@ const Admin = () => {
           title,
           description,
           info,
+          author,
         },
         {
           headers: {
@@ -211,6 +215,13 @@ const Admin = () => {
                 placeholder="Description"
                 onChange={(e) => setDescription(e.target.value)}
               />
+              <Input
+                value={author}
+                name="author"
+                placeholder="Author"
+                onChange={(e) => setAuthor(e.target.value)}
+              />
+
               <TextareaAutosize
                 value={info}
                 name="info"
@@ -269,12 +280,18 @@ const Admin = () => {
                 placeholder="Description"
                 onChange={(e) => setDescription(e.target.value)}
               />
+              <Input
+                name="author"
+                placeholder="Author"
+                onChange={(e) => setAuthor(e.target.value)}
+              />
               <TextareaAutosize
                 name="info"
                 placeholder="Html"
                 onChange={(e) => setInfo(e.target.value)}
                 minRows={3}
               />
+
               {/* Submit Button */}
               <Button
                 variant={"contained"}

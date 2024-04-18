@@ -163,6 +163,34 @@ a {
   text-align: left;
 }
 
+a.nav-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em 1em;
+  border-radius: var(--border-radius);
+  background: linear-gradient(
+    to right,
+    rgba(255, 1, 1, 0.3),
+    rgba(1, 65, 255, 0.3)
+  );
+  color: rgb(var(--foreground-rgb));
+  margin: 10px;
+  font-size: 1em;
+  text-decoration: none;
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+a.nav-btn:hover {
+  background: linear-gradient(
+    to right,
+    rgba(255, 1, 1, 0.5),
+    rgba(1, 65, 255, 0.5)
+  );
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
