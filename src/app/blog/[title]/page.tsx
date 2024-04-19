@@ -3,9 +3,11 @@ import { apiInstance } from "../../../utils/apiInstance";
 import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 
+const REVALIDATE = 1;
+
 export async function generateStaticParams() {
   let url = apiInstance.getUri() + "blogs";
-  const blogs = await fetch(url, { cache: "no-store" });
+  const blogs = await fetch(url, { next: { revalidate: REVALIDATE } });
 
   const data: any = await blogs.json();
 
@@ -25,6 +27,15 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   let title = params.title;
+
+  const blog: any = await fetch(
+    apiInstance.getUri() + `blogs/${params.title}`,
+    {
+      next: { revalidate: REVALIDATE },
+    }
+  );
+  const data: any = await blog.json();
+
   title = title
     .split("-")
     .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
@@ -32,13 +43,20 @@ export async function generateMetadata(
 
   return {
     title: title,
-    description: params.description,
+    description: data.description,
+    openGraph: {
+      title: title,
+      description: data.description,
+      type: "website",
+      url: "https://redsols.com/blog/" + params.title,
+      siteName: "Blog by Redsols",
+    },
   };
 }
 
 export default async function page({ params }: any) {
   let url = apiInstance.getUri() + `blogs/${params.title}`;
-  let blog: any = await fetch(url, { next: { revalidate: 1 } });
+  let blog: any = await fetch(url, { next: { revalidate: REVALIDATE } });
   const data = await blog.json();
 
   return (
