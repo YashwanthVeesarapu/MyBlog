@@ -62,6 +62,9 @@ export default async function page({ params }: any) {
   return (
     <div className="blog">
       <div dangerouslySetInnerHTML={{ __html: data?.info || "" }} />
+      <p className="author">
+        - <strong>{data?.author || "Unknown"}</strong>
+      </p>
     </div>
   );
 }

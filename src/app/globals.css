@@ -141,6 +141,14 @@ a {
   margin-bottom: 10px;
 }
 
+.blog .author {
+  font-size: 0.5em;
+
+  text-align: right;
+
+  opacity: 0.5;
+}
+
 .code {
   padding: 10px;
   border: 2px solid rgb(var(--card-border-rgb), 0.2);
