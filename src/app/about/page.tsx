@@ -21,14 +21,6 @@ const page = () => {
           into the world of software development, we&apos;re here to accompany
           you on your journey.
         </p>
-
-        <p>
-          Who am I? I&apos;m Yashwanth Veesarapu, the founder and curator of
-          Redsols Blog. With a deep-seated passion for innovation and a desire
-          to share knowledge, I launched this platform as a means to connect
-          with individuals who share similar interests and aspirations.{" "}
-        </p>
-
         <p>
           What sets Redsols Blog apart? It&apos;s our commitment to delivering
           content that is not only informative but also relatable and
