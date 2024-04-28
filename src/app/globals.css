@@ -149,7 +149,7 @@ a {
   opacity: 0.5;
 }
 
-.code {
+code {
   padding: 10px;
   border: 2px solid rgb(var(--card-border-rgb), 0.2);
   border-radius: var(--border-radius);
@@ -161,14 +161,6 @@ a {
   text-align: left;
   font-family: var(--font-mono);
   font-size: 0.8em;
-}
-
-.code p {
-  font-family: var(--font-mono);
-  font-size: 0.8em;
-  width: fit-content;
-  margin-bottom: 10px;
-  text-align: left;
 }
 
 a.nav-btn {
