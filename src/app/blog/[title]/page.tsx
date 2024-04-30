@@ -28,8 +28,10 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   let title = params.title;
 
+  console.log(apiInstance.getUri() + `blogs/post/${params.title}`);
+
   const blog: any = await fetch(
-    apiInstance.getUri() + `blogs/${params.title}`,
+    apiInstance.getUri() + `blogs/post/${params.title}`,
     {
       next: { revalidate: REVALIDATE },
     }
@@ -55,7 +57,7 @@ export async function generateMetadata(
 }
 
 export default async function page({ params }: any) {
-  let url = apiInstance.getUri() + `blogs/${params.title}`;
+  let url = apiInstance.getUri() + `blogs/post/${params.title}`;
   let blog: any = await fetch(url, { next: { revalidate: REVALIDATE } });
   const data = await blog.json();
 

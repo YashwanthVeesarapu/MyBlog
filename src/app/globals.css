@@ -1,5 +1,5 @@
 :root {
-  --max-width: 1100px;
+  --max-width: 1200px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
@@ -111,9 +111,13 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 1000px;
+  max-width: 1200px;
   text-align: center;
   font-size: 1.5em;
+}
+
+.blog ol li {
+  margin-left: 2em;
 }
 
 .blog ul {
@@ -161,6 +165,7 @@ code.code {
   text-align: left;
   font-family: var(--font-mono);
   font-size: 0.7em;
+  overflow: scroll;
 }
 
 .code p {
@@ -202,5 +207,11 @@ a.nav-btn:hover {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+@media (max-width: 600px) {
+  .blog {
+    width: 100%;
   }
 }

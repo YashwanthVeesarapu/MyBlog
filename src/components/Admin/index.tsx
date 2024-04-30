@@ -35,6 +35,8 @@ const Admin = () => {
     setBlogs(data);
   };
 
+  console.log(auth.user);
+
   const handleSubmit = async (e: React.FormEvent) => {
     if (auth.user === null || auth.user === undefined) {
       alert("You are not logged in");
@@ -43,7 +45,7 @@ const Admin = () => {
     e.preventDefault();
     setLoading(true);
 
-    let lowerCaseTitle = title.toLowerCase();
+    let lowerCaseTitle = title.trim().toLowerCase();
 
     apiInstance
       .post(
@@ -85,7 +87,7 @@ const Admin = () => {
 
     await apiInstance
       .put(
-        `/blogs/${id}`,
+        `/blogs/post/${id}`,
         {
           title,
           description,
@@ -131,7 +133,9 @@ const Admin = () => {
   };
 
   const editBlog = async (id: string) => {
-    const data = await apiInstance.get(`/blogs/${id}`).then((res) => res.data);
+    const data = await apiInstance
+      .get(`/blogs/post/${id}`)
+      .then((res) => res.data);
     setInfo(data.info);
     setTitle(data.title);
     setDescription(data.description);
