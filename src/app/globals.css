@@ -204,6 +204,30 @@ a.nav-btn:hover {
   );
 }
 
+.glow::after,
+.glow::before {
+  content: "";
+  top: 60%;
+  left: 50%;
+  position: absolute;
+  filter: blur(45px);
+  transform: translateZ(0);
+  z-index: -1;
+}
+
+.glow::after {
+  background: var(--primary-glow);
+  width: 700px;
+  height: 180px;
+}
+
+.glow::before {
+  background: var(--secondary-glow);
+  border-radius: 50%;
+  width: 700px;
+  height: 500px;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -213,5 +237,17 @@ a.nav-btn:hover {
 @media (max-width: 600px) {
   .blog {
     width: 100%;
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px 5px var(--primary-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px var(--primary-glow);
+  }
+  100% {
+    box-shadow: 0 0 10px 5px var(--primary-glow);
   }
 }

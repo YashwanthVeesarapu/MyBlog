@@ -30,6 +30,10 @@ const Admin = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openCreateModal, setOpenCreateModal] = useState(false);
 
+  const [verificationCode, setVerificationCode] = useState("");
+
+  const [openVerificationModal, setOpenVerificationModal] = useState(false);
+
   const fetchBlogs = async () => {
     const data = await apiInstance.get("/blogs").then((res) => res.data);
     setBlogs(data);
@@ -116,6 +120,34 @@ const Admin = () => {
     setLoading(false);
   };
 
+  const verifyCode = async (uid: string, token: string, code: string) => {
+    if (code == null) {
+      alert("Invalid code");
+      return;
+    }
+    apiInstance
+      .post("/users/verify-code", { uid, code, token })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.message == "code_verified") {
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              uid: res.data.uid,
+              token: res.data.token,
+            })
+          );
+          window.location.reload();
+          alert("Account verified");
+        } else {
+          alert("Invalid code");
+        }
+      })
+      .catch((err) => {
+        alert("Invalid code");
+      });
+  };
+
   const handleLogin = async (e: any) => {
     e.preventDefault();
     const email = e.target[0].value;
@@ -124,8 +156,32 @@ const Admin = () => {
       .post("/users/login", { email, password })
       .then((res) => {
         console.log(res.data);
-        localStorage.setItem("user", JSON.stringify(res.data));
-        window.location.reload();
+
+        let token = res.data.token;
+        let uid = res.data.uid;
+
+        if (res.data.message == "verify_code_now") {
+          setOpenVerificationModal(true);
+
+          let verificationDiv = document.getElementById("verification-div");
+          if (verificationDiv) {
+            verificationDiv.innerHTML = `
+            <form id="verification-form">
+              <input type="text" placeholder="Enter verification code" />
+              <button type="submit">Submit</button>
+            </form>
+          `;
+
+            document
+              .getElementById("verification-form")
+              ?.addEventListener("submit", (e) => {
+                e.preventDefault();
+                let code = (document.querySelector("input") as HTMLInputElement)
+                  .value;
+                verifyCode(uid, token, code);
+              });
+          }
+        }
       })
       .catch((err) => {
         alert("Invalid credentials");
@@ -149,6 +205,8 @@ const Admin = () => {
   }, []);
   return (
     <div>
+      {auth.user == null && <div id="verification-div"></div>}
+
       {auth.user && !openCreateModal && !openEditModal && (
         <div>
           <h2>Welcome {auth.user.email}</h2>
@@ -189,7 +247,7 @@ const Admin = () => {
         </div>
       )}
 
-      {auth.user === null && (
+      {auth.user === null && !openVerificationModal && (
         <div>
           <h2>Login</h2>
           <form onSubmit={handleLogin}>
