@@ -1,0 +1,63 @@
+a {
+  color: var(--brand1);
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 2em;
+  margin: 10px 0;
+}
+
+.number-code {
+  // overflow: auto;
+  > div {
+    display: flex;
+    > input:not(:last-child) {
+      margin-right: calc(var(--spacing) * 2);
+    }
+  }
+}
+
+.verification {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    input.code-input {
+      font-size: 1.5em;
+      width: 1em;
+      text-align: center;
+      flex: 1 0 1em;
+      border: 1px solid rgb(var(--foreground-rgb));
+    }
+    input {
+      padding: 20px;
+      margin-top: 5px;
+    }
+  }
+}
+
+.login {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      padding: 10px;
+      margin-top: 5px;
+    }
+  }
+}
