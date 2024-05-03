@@ -4,16 +4,22 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .blog-list-item {
-    margin-bottom: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
-    &:hover {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-    }
+}
+
+.blog-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  gap: 0.5rem;
+  margin: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  border-radius: var(--border-radius);
+
+  &:hover {
+    cursor: pointer;
   }
 }
 

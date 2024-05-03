@@ -140,16 +140,6 @@ const Admin = () => {
     <div>
       {auth.user && !openCreateModal && !openEditModal && (
         <div>
-          <h2>Welcome {auth.user.email}</h2>
-          <button
-            onClick={() => {
-              localStorage.removeItem("user");
-              window.location.reload();
-            }}
-          >
-            Logout
-          </button>
-
           <div className="blog-container">
             <Button
               onClick={() => {
@@ -237,7 +227,10 @@ const Admin = () => {
           </div>
 
           <div className={"viewer"}>
-            <div dangerouslySetInnerHTML={{ __html: info || "" }} />
+            <div
+              className="blog"
+              dangerouslySetInnerHTML={{ __html: info || "" }}
+            />
           </div>
         </div>
       )}

@@ -10,19 +10,17 @@ export default async function Home() {
 
   return (
     <MainLayout>
-      <div className={"description"}>
+      <div className="blogs">
         <p>Welcome to Blog by Redsols</p>
-        <div className="blogs">
-          {data.map((element: Blog) => (
-            <Link
-              key={element.title}
-              href={`blog/${element.title.split(" ").join("-")}/`}
-            >
-              {element.title}
-            </Link>
-          ))}
-          <div className="center"></div>
-        </div>
+        {data.map((element: Blog) => (
+          <Link
+            key={element.title}
+            href={`blog/${element.title.split(" ").join("-")}/`}
+          >
+            {element.title}
+          </Link>
+        ))}
+        <div className="center"></div>
       </div>
     </MainLayout>
   );
