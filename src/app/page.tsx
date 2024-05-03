@@ -11,7 +11,8 @@ export default async function Home() {
   return (
     <MainLayout>
       <div className="blogs">
-        <p>Welcome to Blog by Redsols</p>
+        <h2> Welcome to Blog by Redsols</h2>
+
         {data.map((element: Blog) => (
           <Link
             key={element.title}
