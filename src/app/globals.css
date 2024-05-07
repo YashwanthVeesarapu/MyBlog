@@ -147,8 +147,8 @@ a {
 
 .blog .author {
   font-size: 0.5em;
-
   text-align: right;
+  font-weight: bold;
 
   opacity: 0.5;
 }

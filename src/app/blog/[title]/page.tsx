@@ -62,21 +62,36 @@ export default async function page({ params }: any) {
   const data = await blog.json();
 
   return (
-    <div className="blog">
-      <div itemScope itemType="http://schema.org/BlogPosting">
-        <meta
-          itemProp="headline"
-          content={data.title.charAt(0).toUpperCase() + data.title.substr(1)}
-        />
-        <meta itemProp="description" content={data?.description} />
-        <meta itemProp="author" content={data?.author} />
-        <meta itemProp="publisher" content="Redsols" />
+    <div className="blog" itemScope itemType="http://schema.org/BlogPosting">
+      <div itemProp="headline">
+        {data.title.charAt(0).toUpperCase() + data.title.substr(1)}
       </div>
 
       <div dangerouslySetInnerHTML={{ __html: data?.info || "" }} />
-      <p className="author">
-        - <strong>{data?.author || "Unknown"}</strong>
-      </p>
+
+      <div className="author">
+        by{" "}
+        {data?.author ? (
+          <span
+            itemProp="author"
+            itemScope
+            itemType="https://schema.org/Person"
+          >
+            <a
+              itemProp="url"
+              href={
+                data.author.toLowerCase() == "yashwanth veesarapu"
+                  ? "https://yash.redsols.us/"
+                  : "https://www.redsols.us/"
+              }
+            >
+              <span itemProp="name">{data.author}</span>
+            </a>
+          </span>
+        ) : (
+          "Unknown"
+        )}
+      </div>
     </div>
   );
 }
