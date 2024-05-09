@@ -63,10 +63,10 @@ export default async function page({ params }: any) {
 
   return (
     <div className="blog" itemScope itemType="http://schema.org/BlogPosting">
-      <div itemProp="headline">
-        {data.title.charAt(0).toUpperCase() + data.title.substr(1)}
-      </div>
-
+      <meta
+        itemProp="headline"
+        content={data.title.charAt(0).toUpperCase() + data.title.substr(1)}
+      />
       <div dangerouslySetInnerHTML={{ __html: data?.info || "" }} />
 
       <div className="author">
