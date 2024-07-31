@@ -186,10 +186,9 @@ a {
 }
 
 .blog .author {
-  font-size: 0.5em;
+  font-size: 0.8em;
   text-align: right;
   font-weight: bold;
-
   opacity: 0.5;
 }
 
@@ -199,18 +198,18 @@ code.code {
   border-radius: var(--border-radius);
   display: flex;
   align-self: center;
-  padding: 0.5em 1em;
+  padding: 10px 1em;
   margin: 0 1em;
   margin-top: 10px;
   text-align: left;
   font-family: var(--font-mono);
-  font-size: 0.7em;
-  overflow: scroll;
+  font-size: 0.9em;
+  overflow: auto;
 }
 
 .code p {
   font-family: var(--font-mono);
-  font-size: 0.8em;
+  font-size: 0.9em;
   width: fit-content;
   margin-bottom: 10px;
   text-align: left;

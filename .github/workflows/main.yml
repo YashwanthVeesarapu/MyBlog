@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${{github.workspace}}/key.json
 
     steps:
       - name: Checkout code
@@ -28,14 +30,13 @@ jobs:
       - name: Build the Next.js app
         run: npm run build
 
-      - name: List contents of 'out'
-        run: ls -R out
+      - name: Authenticate with Google Cloud
+        run: |
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" | base64 --decode > ${{ github.workspace }}/key.json
 
       - name: Set up Firebase CLI
         run: |
           npm install -g firebase-tools
       - name: Deploy to Firebase Hosting
         run: |
-          firebase deploy --only hosting --token "$FIREBASE_TOKEN"
-        env:
-          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
+          firebase deploy --only hosting
