@@ -192,7 +192,7 @@ a {
   opacity: 0.5;
 }
 
-code.code {
+code {
   padding: 10px;
   border: 2px solid rgb(var(--card-border-rgb), 0.2);
   border-radius: var(--border-radius);
