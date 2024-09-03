@@ -69,28 +69,36 @@ export default async function page({ params }: any) {
       />
       <div dangerouslySetInnerHTML={{ __html: data?.info || "" }} />
 
-      <div className="author">
-        by{" "}
-        {data?.author ? (
-          <span
-            itemProp="author"
-            itemScope
-            itemType="https://schema.org/Person"
-          >
-            <a
-              itemProp="url"
-              href={
-                data.author.toLowerCase() == "yashwanth veesarapu"
-                  ? "https://yash.redsols.us/"
-                  : "https://www.redsols.us/"
-              }
-            >
-              <span itemProp="name">{data.author}</span>
-            </a>
-          </span>
-        ) : (
-          "Unknown"
+      <div className="bottom">
+        {data?.last_updated && (
+          <div className="last_updated">
+            Last updated: {new Date(data.last_updated).toDateString()}
+          </div>
         )}
+
+        <div className="author">
+          by{" "}
+          {data?.author ? (
+            <span
+              itemProp="author"
+              itemScope
+              itemType="https://schema.org/Person"
+            >
+              <a
+                itemProp="url"
+                href={
+                  data.author.toLowerCase() == "yashwanth veesarapu"
+                    ? "https://yash.redsols.us/"
+                    : "https://www.redsols.us/"
+                }
+              >
+                <span itemProp="name">{data.author}</span>
+              </a>
+            </span>
+          ) : (
+            "Unknown"
+          )}
+        </div>
       </div>
     </div>
   );
