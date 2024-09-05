@@ -221,6 +221,14 @@ code {
   text-align: left;
 }
 
+code.inline-code {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  display: inline;
+}
+
 a.nav-btn {
   display: flex;
   justify-content: center;
