@@ -61,8 +61,43 @@ export default async function page({ params }: any) {
   let blog: any = await fetch(url, { next: { revalidate: REVALIDATE } });
   const data = await blog.json();
 
+  console.log(data);
+
+  // Add JSON-LD for SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: data.title.charAt(0).toUpperCase() + data.title.substr(1),
+    description: data.description,
+    url: "https://redsols.com/blog/" + params.title,
+    author: {
+      "@type": "Person",
+      name: data.author,
+      url:
+        data.author == "Yashwanth Veesarapu"
+          ? "https://yash.redsols.us/"
+          : "https://www.redsols.us/",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://redsols.com/blog/" + params.title,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Redsols",
+      url: "https://redsols.com",
+    },
+    dateModified: data.last_updated,
+  };
+
+  console.log(jsonLd);
+
   return (
     <div className="blog" itemScope itemType="http://schema.org/BlogPosting">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      ></script>
       <meta
         itemProp="headline"
         content={data.title.charAt(0).toUpperCase() + data.title.substr(1)}
