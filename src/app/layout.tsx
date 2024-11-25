@@ -38,6 +38,10 @@ export default async function RootLayout({
         />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
+        <meta
+          name="impact-site-verification"
+          content="c05f4ee4-3f67-48bb-b824-df87f4073e24"
+        />
       </Head>
       <body className={inter.className}>{children}</body>
       {/* <script
