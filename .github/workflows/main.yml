@@ -1,13 +1,17 @@
+# on:
+#   push:
+#     branches:
+#       - main
+
+# workflow_dispatch:
+# schedule:
+#   - cron: "0 0 * * *" # This schedule runs every day at 12:00 am UTC
 name: CI/CD Workflow
 
 on:
   push:
     branches:
-      - main
-
-  workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * *" # This schedule runs every day at 12:00 am UTC
+      - prod
 
 jobs:
   build:
