@@ -11,6 +11,7 @@ pipeline {
                     sh "cd /home/yash/home/Workspace/Redsols/MyBlog"
                     sh "git fetch --all"
                 }
+            }
         }
 
         stage('Build') {
