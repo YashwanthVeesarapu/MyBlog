@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        WORKSPACE_DIR = "/home/yash/home/Workspace/Redsols/MyBlog"
+        WORKSPACE_DIR = "/home/yash/Workspace/Redsols/MyBlog"
     }
 
     stages {
