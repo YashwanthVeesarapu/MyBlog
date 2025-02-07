@@ -1,38 +1,42 @@
 pipeline {
     agent any
 
+    environment {
+        WORKSPACE_DIR = "/home/yash/home/Workspace/Redsols/MyBlog"
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
-                // Clone the Git repository
-                // go to foler where the code is cloned
-                // /home/yash/home/Workspace/Redsols/MyBlog
                 script {
-                    sh "sudo cd /home/yash/home/Workspace/Redsols/MyBlog"
-                    sh "git fetch --all"
+                    // Ensure the correct directory and update the repo
+                    sh """
+                        cd ${WORKSPACE_DIR}
+                        git fetch --all
+                        git reset --hard origin/main
+                    """
                 }
             }
         }
 
         stage('Build') {
             steps {
-                // Run the build
                 script {
-                    sh "sudo cd /home/yash/home/Workspace/Redsols/MyBlog"
-                    sh "npm install"
-                    sh "npm run build"
+                    sh """
+                        cd ${WORKSPACE_DIR}
+                        npm install
+                        npm run build
+                    """
                 }
             }
         }
 
         stage('Deploy') {
             steps {
-                // Deploy the application
                 script {
                     sh "sudo systemctl restart blog"
                 }
             }
         }
     }
-
 }
