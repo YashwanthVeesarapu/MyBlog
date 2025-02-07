@@ -8,7 +8,7 @@ pipeline {
                 // go to foler where the code is cloned
                 // /home/yash/home/Workspace/Redsols/MyBlog
                 script {
-                    sh "cd /home/yash/home/Workspace/Redsols/MyBlog"
+                    sh "sudo cd /home/yash/home/Workspace/Redsols/MyBlog"
                     sh "git fetch --all"
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 // Run the build
                 script {
-                    sh "cd /home/yash/home/Workspace/Redsols/MyBlog"
+                    sh "sudo cd /home/yash/home/Workspace/Redsols/MyBlog"
                     sh "npm install"
                     sh "npm run build"
                 }
