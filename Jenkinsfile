@@ -12,8 +12,8 @@ pipeline {
                     // Ensure the correct directory and update the repo
                     sh """
                         cd ${WORKSPACE_DIR}
-                        git fetch --all
-                        git reset --hard origin/main
+                        git reset --hard HEAD
+                        git pull
                     """
                 }
             }
