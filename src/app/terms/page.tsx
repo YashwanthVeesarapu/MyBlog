@@ -52,7 +52,7 @@ const page = () => {
         <h2>6. Contact Us</h2>
         <p>
           If you have any questions or concerns about these Terms of Service,
-          please contact us at blog@redsols.us.
+          please contact us at blog@redsols.com.
         </p>
       </div>
     </MainLayout>

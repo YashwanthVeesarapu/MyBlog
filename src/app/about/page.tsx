@@ -51,7 +51,7 @@ const page = () => {
 
         <p>
           You can reach out to us via{" "}
-          <a href="mailto:blog@redsols.us">blog@redsols.us</a>. We are always
+          <a href="mailto:blog@redsols.com">blog@redsols.com</a>. We are always
           open to collaborations, suggestions, and discussions.
         </p>
       </div>

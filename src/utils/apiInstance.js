@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let dev = false;
-let url = "https://blog-api.redsols.us/";
+let url = "https://api.blog.redsols.com/";
 
 // if (window.location.hostname === "localhost") {
 //   dev = true;

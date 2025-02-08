@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       disallow: "/admin/",
     },
-    sitemap: "https://blog.redsols.us/sitemap.xml",
+    sitemap: "https://blog.redsols.com/sitemap.xml",
   };
 }

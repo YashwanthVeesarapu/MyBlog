@@ -75,8 +75,8 @@ export default async function page({ params }: any) {
       name: data.author,
       url:
         data.author == "Yashwanth Veesarapu"
-          ? "https://yash.redsols.us/"
-          : "https://www.redsols.us/",
+          ? "https://yash.redsols.com/"
+          : "https://www.redsols.com/",
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -123,8 +123,8 @@ export default async function page({ params }: any) {
                 itemProp="url"
                 href={
                   data.author.toLowerCase() == "yashwanth veesarapu"
-                    ? "https://yash.redsols.us/"
-                    : "https://www.redsols.us/"
+                    ? "https://yash.redsols.com/"
+                    : "https://www.redsols.com/"
                 }
               >
                 <span itemProp="name">{data.author}</span>

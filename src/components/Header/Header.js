@@ -8,7 +8,7 @@ const Header = () => {
     <header>
       <div className="left"></div>
       <div className="middle">
-        {/* <Link target="_blank" href={"https://www.redsols.us/"}>
+        {/* <Link target="_blank" href={"https://www.redsols.com/"}>
           Redsols
         </Link> */}
 
@@ -22,7 +22,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="right">
-        {/* <Link target="_blank" href={"https://www.redsols.us/"}>
+        {/* <Link target="_blank" href={"https://www.redsols.com/"}>
           Redsols
         </Link> */}
       </div>

@@ -72,7 +72,7 @@ const page = () => {
 
         <p>
           If you have any questions about this Privacy Policy, please contact us
-          at blog@redsols.us.
+          at blog@redsols.com.
         </p>
       </div>
     </MainLayout>

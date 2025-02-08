@@ -4,7 +4,7 @@ import React from "react";
 const page = () => {
   return (
     <MainLayout>
-      <p style={{ padding: "6em" }}> You can contact us at blog@redsols.us</p>
+      <p style={{ padding: "6em" }}> You can contact us at blog@redsols.com</p>
     </MainLayout>
   );
 };

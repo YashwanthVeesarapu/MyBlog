@@ -1,4 +1,4 @@
-const SERVER_URL = "https://blog-api.redsols.us/blogs/";
+const SERVER_URL = "https://api.blog.redsols.com/blogs/";
 
 export default async function sitemap() {
   const call = await fetch(SERVER_URL, { next: { revalidate: 3600 } });
