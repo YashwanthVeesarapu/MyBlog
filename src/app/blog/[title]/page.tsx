@@ -1,7 +1,8 @@
 import MainLayout from "@/layouts/MainLayout";
-import { apiInstance } from "../../../utils/apiInstance";
+
 import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
+import { apiInstance } from "@/services";
 
 const REVALIDATE = 1;
 
@@ -61,8 +62,6 @@ export default async function page({ params }: any) {
   let blog: any = await fetch(url, { next: { revalidate: REVALIDATE } });
   const data = await blog.json();
 
-  console.log(data);
-
   // Add JSON-LD for SEO
   const jsonLd = {
     "@context": "https://schema.org",
@@ -89,8 +88,6 @@ export default async function page({ params }: any) {
     },
     dateModified: data.last_updated,
   };
-
-  console.log(jsonLd);
 
   return (
     <div className="blog" itemScope itemType="http://schema.org/BlogPosting">

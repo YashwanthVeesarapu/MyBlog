@@ -1,4 +1,4 @@
-import { apiInstance } from "@/utils/apiInstance";
+import { apiInstance } from "@/services";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type User = {

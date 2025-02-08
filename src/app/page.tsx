@@ -1,9 +1,10 @@
 import "./page.scss";
 
 import MainLayout from "./../layouts/MainLayout";
-import { apiInstance } from "@/utils/apiInstance";
+
 import Link from "next/link";
 import { Blog } from "@/models/blog.model";
+import { apiInstance } from "@/services";
 
 export default async function Home() {
   const data = await getData();
@@ -11,6 +12,7 @@ export default async function Home() {
   return (
     <MainLayout>
       <div className="blogs">
+         
         {data.map((element: Blog) => (
           <Link
             key={element.title}

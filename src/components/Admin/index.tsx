@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../AuthProvider";
-import { apiInstance } from "@/utils/apiInstance";
+
 import { Blog } from "@/models/blog.model";
 
 import "./styles.scss";
@@ -13,6 +13,7 @@ import {
 import { headers } from "next/headers";
 import { set } from "firebase/database";
 import Login from "../Login";
+import { apiInstance } from "@/services";
 
 const Admin = () => {
   const [blogs, setBlogs] = useState([]);
@@ -39,8 +40,6 @@ const Admin = () => {
     const data = await apiInstance.get("/blogs").then((res) => res.data);
     setBlogs(data);
   };
-
-  console.log(auth.user);
 
   const handleSubmit = async (e: React.FormEvent) => {
     if (auth.user === null || auth.user === undefined) {
