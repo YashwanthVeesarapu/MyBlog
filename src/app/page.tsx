@@ -16,7 +16,7 @@ export default async function Home() {
         {data.map((element: Blog) => (
           <Link
             key={element.title}
-            href={`blog/${element.title.split(" ").join("-")}/`}
+            href={`/blog/${element.title.split(" ").join("-")}/`}
           >
             {element.title}
           </Link>
