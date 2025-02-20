@@ -51,7 +51,7 @@ export async function generateMetadata(
       title: title,
       description: data.description,
       type: "website",
-      url: "https://redsols.com/blog/" + params.title,
+      url: "https://blog.redsols.com/blog/" + params.title,
       siteName: "Blog by Redsols",
     },
   };
