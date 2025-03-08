@@ -1,0 +1,40 @@
+# Node.js dependencies (they will be installed inside Docker)
+node_modules
+npm-debug.log
+yarn-error.log
+
+.next
+
+# Environment variables & secrets (never include in Docker images)
+.env
+.env.local
+.env.production
+.env.development
+
+# Build & cache files (only keep final build in production images)
+dist
+build
+.cache
+
+# Local logs & runtime files
+logs
+*.log
+pids
+*.pid
+*.seed
+*.pid.lock
+coverage
+.DS_Store
+Thumbs.db
+
+# IDE & editor settings
+.vscode
+.idea
+*.swp
+
+# Docker-specific files (avoid copying itself)
+.dockerignore
+docker-compose.yml
+
+
+

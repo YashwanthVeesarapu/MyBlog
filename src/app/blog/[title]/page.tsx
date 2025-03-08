@@ -7,7 +7,7 @@ import { apiInstance } from "@/services";
 const REVALIDATE = 1;
 
 export async function generateStaticParams() {
-  let url = apiInstance.getUri() + "blogs";
+  let url = apiInstance.getUri() + "/blog/blogs";
   const blogs = await fetch(url, { next: { revalidate: REVALIDATE } });
 
   const data: any = await blogs.json();
@@ -29,15 +29,15 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   let title = params.title;
 
-  console.log(apiInstance.getUri() + `blogs/post/${params.title}`);
-
   const blog: any = await fetch(
-    apiInstance.getUri() + `blogs/post/${params.title}`,
+    apiInstance.getUri() + `/blog/blogs/post/${params.title}`,
     {
       next: { revalidate: REVALIDATE },
     }
   );
   const data: any = await blog.json();
+
+  console.log(title);
 
   title = title
     .split("-")
@@ -58,7 +58,7 @@ export async function generateMetadata(
 }
 
 export default async function page({ params }: any) {
-  let url = apiInstance.getUri() + `blogs/post/${params.title}`;
+  let url = apiInstance.getUri() + `/blog/blogs/post/${params.title}`;
   let blog: any = await fetch(url, { next: { revalidate: REVALIDATE } });
   const data = await blog.json();
 

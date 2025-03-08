@@ -37,7 +37,7 @@ const Admin = () => {
   const [openVerificationModal, setOpenVerificationModal] = useState(false);
 
   const fetchBlogs = async () => {
-    const data = await apiInstance.get("/blogs").then((res) => res.data);
+    const data = await apiInstance.get("/blog/blogs").then((res) => res.data);
     setBlogs(data);
   };
 
@@ -53,7 +53,7 @@ const Admin = () => {
 
     apiInstance
       .post(
-        "/blogs",
+        "/blog/blogs",
         {
           title: lowerCaseTitle,
           description,
@@ -91,7 +91,7 @@ const Admin = () => {
 
     await apiInstance
       .put(
-        `/blogs/post/${id}`,
+        `/blog/blogs/post/${id}`,
         {
           title,
           description,
@@ -122,7 +122,7 @@ const Admin = () => {
 
   const editBlog = async (id: string) => {
     const data = await apiInstance
-      .get(`/blogs/post/${id}`)
+      .get(`/blog/blogs/post/${id}`)
       .then((res) => res.data);
     setInfo(data.info);
     setTitle(data.title);

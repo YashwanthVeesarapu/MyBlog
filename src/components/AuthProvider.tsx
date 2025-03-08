@@ -54,7 +54,7 @@ export const useAuth = () => {
 };
 
 export const login = async (email: string, password: string) => {
-  const user: User = await apiInstance.post("/users/login", {
+  const user: User = await apiInstance.post("/blog/auth/users/login", {
     email,
     password,
   });

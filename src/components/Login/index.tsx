@@ -22,7 +22,7 @@ const Login = () => {
     let uid = userData.uid;
     let token = userData.token;
     apiInstance
-      .post("/users/verify-code", { uid, code, token })
+      .post("/blog/auth/verify-code", { uid, code, token })
       .then((res) => {
         if (res.data.message == "code_verified") {
           localStorage.setItem(
@@ -49,7 +49,7 @@ const Login = () => {
     const email = e.target[0].value;
     const password = e.target[1].value;
     await apiInstance
-      .post("/users/login", { email, password })
+      .post("/blog/auth/login", { email, password })
       .then((res) => {
         let token = res.data.token;
         let uid = res.data.uid;

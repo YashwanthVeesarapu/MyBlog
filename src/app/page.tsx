@@ -28,7 +28,7 @@ export default async function Home() {
 }
 
 const getData = async () => {
-  const data = await apiInstance.get("/blogs").then((res) => res.data);
+  const data = await apiInstance.get("/blog/blogs").then((res) => res.data);
 
   return data;
 };

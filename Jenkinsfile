@@ -2,39 +2,43 @@ pipeline {
     agent any
 
     environment {
-        WORKSPACE_DIR = "/home/yash/Workspace/Redsols/MyBlog"
+        DOCKER_IMAGE = "redsols/blog"
+        DOCKER_TAG = "latest"
+        REGISTRY_CREDENTIALS = "docker-credentials"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
                 script {
-                    // Ensure the correct directory and update the repo
-                    sh """
-                        cd ${WORKSPACE_DIR}
-                        git reset --hard HEAD
-                        git pull
-                    """
+                    sh 'git reset --hard HEAD && git pull'
                 }
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    sh """
-                        cd ${WORKSPACE_DIR}
-                        npm install
-                        npm run build
-                    """
+                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
         }
 
-        stage('Deploy') {
+        stage('Push Docker Image') {
             steps {
                 script {
-                    sh "sudo systemctl restart blog"
+                    withDockerRegistry([credentialsId: REGISTRY_CREDENTIALS, url: '']) {
+                        sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                    }
+                }
+            }
+        }
+
+
+        stage('Clean Up') {
+            steps {
+                script {
+                    sh "docker rmi ${DOCKER_IMAGE}:${DOCKER_TAG} || true"
                 }
             }
         }
