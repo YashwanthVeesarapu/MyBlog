@@ -54,10 +54,24 @@ pipeline {
         stage('Verify New Container') {
             steps {
                 script {
-                    sleep 5
-                    def healthCheck = sh(script: "curl -s -o /dev/null -w '%{http_code}' http://localhost:${NEW_PORT}", returnStdout: true).trim()
-                    if (healthCheck != "200") {
-                        error("New container failed health check! Deployment aborted.")
+                    def retries = 5
+                    def delay = 5
+                    def healthStatus = "starting"
+
+                    for (int i = 0; i < retries; i++) {
+                        sleep delay
+                        healthStatus = sh(script: "docker inspect --format='{{.State.Health.Status}}' ${NEW_CONTAINER}", returnStdout: true).trim()
+
+                        if (healthStatus == "healthy") {
+                            echo "Container is healthy!"
+                            break
+                        } else {
+                            echo "Health check attempt ${i + 1}/${retries}: Current status - ${healthStatus}"
+                        }
+                    }
+
+                    if (healthStatus != "healthy") {
+                        error("New container did not become healthy! Deployment aborted.")
                     }
                 }
             }
