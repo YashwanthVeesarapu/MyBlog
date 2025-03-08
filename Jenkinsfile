@@ -54,15 +54,13 @@ pipeline {
         stage('Verify New Container') {
             steps {
                 script {
-                    // Wait for the new container to start
                     sleep 5
-                    def response = sh(script: "docker exec ${NEW_CONTAINER} curl -s -o /dev/null -w '%{http_code}' http://localhost:${NEW_PORT}", returnStdout: true).trim()
+                    def response = sh(script: "docker exec ${NEW_CONTAINER} wget -qO- --server-response http://localhost:3011 2>&1 | awk '/HTTP\\// {print \$2}'", returnStdout: true).trim()
                     echo "Container Health Check Response: ${response}"
 
                     if (response != "200") {
                         error("Application inside container is not responding! Deployment aborted.")
                     }
-
                 }
             }
         }
