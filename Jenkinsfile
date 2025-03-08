@@ -55,7 +55,7 @@ pipeline {
             steps {
                 script {
                     sleep 5
-                    def healthCheck = sh(script: "curl --retry 5 --retry-delay 5 --connect-timeout 3 --max-time 10 -s -o /dev/null -w "%{http_code}" http://127.0.0.1:${NEW_PORT}", returnStdout: true).trim()
+                    def healthCheck = sh(script: "curl -s -o /dev/null -w '%{http_code}' http://localhost:${NEW_PORT}", returnStdout: true).trim()
                     if (healthCheck != "200") {
                         error("New container failed health check! Deployment aborted.")
                     }
