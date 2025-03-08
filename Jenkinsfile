@@ -5,14 +5,14 @@ pipeline {
         DOCKER_IMAGE = "redsols/blog"
         DOCKER_TAG = "latest"
         REGISTRY_CREDENTIALS = "docker-credentials"
+        GITHIB = "https://github.com/YashwanthVeeravalli/MyBlog.git"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
                 script {
-                    sh 'git reset --hard HEAD && git pull'
-                }
+                    git branch: 'main', url: GITHIB
             }
         }
 
