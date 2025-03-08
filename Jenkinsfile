@@ -13,6 +13,7 @@ pipeline {
             steps {
                 script {
                     git branch: 'main', url: GITHIB
+                }
             }
         }
 
