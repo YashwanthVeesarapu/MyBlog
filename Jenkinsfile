@@ -37,12 +37,12 @@ pipeline {
         }
 
 
-        stage('Clean Up') {
-            steps {
-                script {
-                    sh "docker rmi ${DOCKER_IMAGE}:${DOCKER_TAG} || true"
-                }
-            }
-        }
+        // stage('Clean Up') {
+        //     steps {
+        //         script {
+        //             sh "docker rmi ${DOCKER_IMAGE}:${DOCKER_TAG} || true"
+        //         }
+        //     }
+        // }
     }
 }
