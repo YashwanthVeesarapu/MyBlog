@@ -6,6 +6,8 @@ pipeline {
         DOCKER_TAG = "latest"
         REGISTRY_CREDENTIALS = "docker-credentials"
         GITHIB = "https://github.com/YashwanthVeesarapu/MyBlog.git"
+        CONTAINER1 = "blog-v1"
+        CONTAINER2 = "blog-v2"
         PORT1 = "3011"
         PORT2 = "3012"
     }
