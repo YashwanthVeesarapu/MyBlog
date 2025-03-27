@@ -62,7 +62,7 @@ const Admin = () => {
         },
         {
           headers: {
-            "x-access-token": auth.user.token,
+            Authorization: `Bearer ${auth.user.token}`,
           },
         }
       )
@@ -91,7 +91,7 @@ const Admin = () => {
 
     await apiInstance
       .put(
-        `/blog/blogs/post/${id}`,
+        `/blog/blogs/${id}`,
         {
           title,
           description,
@@ -100,7 +100,7 @@ const Admin = () => {
         },
         {
           headers: {
-            "x-access-token": auth.user.token,
+            Authorization: `Bearer ${auth.user.token}`,
           },
         }
       )
