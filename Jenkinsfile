@@ -46,7 +46,7 @@ pipeline {
                 sh """
                     docker stop ${NEW_CONTAINER} || true
                     docker rm ${NEW_CONTAINER} || true
-                    docker run -d --name ${NEW_CONTAINER} -p ${NEW_PORT}:3011 ${DOCKER_IMAGE}:${DOCKER_TAG}
+                    docker run --restart unless-stopped -d --name ${NEW_CONTAINER} -p ${NEW_PORT}:3011 ${DOCKER_IMAGE}:${DOCKER_TAG}
                 """
             }
         }

@@ -10,8 +10,6 @@ import {
   Input,
   TextareaAutosize,
 } from "@mui/material";
-import { headers } from "next/headers";
-import { set } from "firebase/database";
 import Login from "../Login";
 import { apiInstance } from "@/services";
 
