@@ -40,7 +40,6 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy New Container') {
             steps {
                 sh """
@@ -50,7 +49,6 @@ pipeline {
                 """
             }
         }
-
         stage('Verify New Container') {
             steps {
                 script {

@@ -1,0 +1,15 @@
+services:
+  blog:
+    container_name: blog
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3011:3011"
+    networks:
+      - default
+
+networks:
+  default:
+    name: shared-network
+    external: true

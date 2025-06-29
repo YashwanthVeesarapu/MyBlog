@@ -1,0 +1,39 @@
+pipeline {
+    agent any 
+
+    environment {
+        GIT_REPO_URL = "https://github.com/YashwanthVeesarapu/MyBlog.git"
+        SERVER_HOSTNAME = 'ec2-3-216-147-31.compute-1.amazonaws.com'
+        SERVER_USERNAME = 'ubuntu'
+    }
+
+    stages {
+        stage('Deploy to Server') {
+            steps {
+                sshagent(credentials: ['micro-ssh']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${SERVER_HOSTNAME} << EOF
+                        # Ensure project directory exists
+                        mkdir -p /home/${SERVER_USERNAME}/Blog
+                        cd /home/${SERVER_USERNAME}/Blog
+
+                        # Clone or update the repo
+                        if [ -d ".git" ]; then
+                            git pull origin main
+                        else
+                            git clone ${GIT_REPO_URL} .
+                        fi
+
+                        # Build and run with Docker Compose
+                        docker compose up -d --build
+                        docker image prune -f # Clean up
+EOF
+                '''
+                }
+            }
+        }
+    }
+
+
+
+}

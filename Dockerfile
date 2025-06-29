@@ -1,5 +1,5 @@
 # Step 1: Build Stage
-FROM node:18-alpine AS build-stage
+FROM node:24-alpine AS build-stage
 
 # Set working directory inside container
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # Step 2: Production Stage
-FROM node:18-alpine AS production-stage
+FROM node:24-alpine AS production-stage
 
 # Set working directory
 WORKDIR /app
