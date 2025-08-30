@@ -32,7 +32,7 @@ jobs:
         run: npm install
 
       - name: Build the Next.js app
-        run: npm run build
+        run: npm run build && npm run export
 
       - name: Authenticate with Google Cloud
         run: |
