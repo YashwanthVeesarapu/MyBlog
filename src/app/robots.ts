@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        disallow: ["/admin/", "/api/", "/private/"], // Added "/private/" to block sensitive areas
+        disallow: ["/admin/", "/api/", "/private/"], // Blocks sensitive areas
       },
       {
         userAgent: "BadBot",
@@ -18,6 +18,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "SemrushBot",
         disallow: ["/"], // Blocks all access for "SemrushBot"
+      },
+      {
+        userAgent: "meta-externalagent",
+        disallow: ["/"], // Blocks all access for "meta-externalagent"
       },
     ],
     sitemap: "https://blog.redsols.com/sitemap.xml",
