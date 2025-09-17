@@ -42,6 +42,12 @@ export default async function RootLayout({
           name="impact-site-verification"
           content="c05f4ee4-3f67-48bb-b824-df87f4073e24"
         />
+        <meta property="og:title" content="Blog by Redsols" />
+        <meta
+          property="og:description"
+          content="Explore the vibrant world of Redsols Blog."
+        />
+        <meta property="og:image" content="/path-to-image.jpg" />
         <link rel="canonical" href="https://blog.redsols.com" />
       </Head>
       <body className={inter.className}>{children}</body>
