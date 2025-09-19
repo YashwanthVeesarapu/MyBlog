@@ -4,7 +4,7 @@ import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { apiInstance } from "@/services";
 
-const REVALIDATE = 1;
+const REVALIDATE = 60; // adjust if needed
 
 export async function generateStaticParams() {
   let url = apiInstance.getUri() + "/blog/blogs";
@@ -27,32 +27,41 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  let title = params.title;
+  const { title: slug } = params;
 
-  const blog: any = await fetch(
-    apiInstance.getUri() + `/blog/blogs/post/${params.title}`,
-    {
-      next: { revalidate: REVALIDATE },
-    }
-  );
-  const data: any = await blog.json();
+  // ✅ Use the correct API path (no extra /blog prefix)
+  const blogRes = await fetch(apiInstance.getUri() + `/blogs/post/${slug}`, {
+    next: { revalidate: REVALIDATE },
+  });
 
-  console.log(title);
+  const data: any = await blogRes.json();
 
-  title = title
+  // ✅ Human-readable title
+  const formattedTitle = slug
     .split("-")
     .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
     .join(" ");
 
+  // ✅ Build absolute URL once
+  const canonicalUrl = `https://blog.redsols.com/blog/${slug}`;
+
   return {
-    title: title,
+    title: formattedTitle,
     description: data.description,
+    alternates: {
+      canonical: canonicalUrl, // ✅ add canonical
+    },
     openGraph: {
-      title: title,
+      title: formattedTitle,
       description: data.description,
-      type: "website",
-      url: "https://blog.redsols.com/blog/" + params.title,
+      type: "article", // better than "website" for blog posts
+      url: canonicalUrl,
       siteName: "Blog by Redsols",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: formattedTitle,
+      description: data.description,
     },
   };
 }
