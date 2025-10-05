@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import Login from "../Login";
 import { apiInstance } from "@/services";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const BLOG_CATEGORIES = [
   "",
@@ -36,7 +36,7 @@ const Admin = () => {
   const router = useRouter();
 
   // query param edit
-  const queryParams = new URLSearchParams(window.location.search);
+  const queryParams = useSearchParams();
   const editParam = queryParams.get("edit");
 
   const [editData, setEditData] = useState({} as any);
