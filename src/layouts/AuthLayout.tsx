@@ -9,17 +9,21 @@ const AuthLayout = (props: any) => {
   return (
     <>
       <header className="auth-header">
-        <h1>Admin</h1>
-        {auth.user && (
-          <button
-            onClick={() => {
-              localStorage.removeItem("user");
-              window.location.reload();
-            }}
-          >
-            Logout
-          </button>
-        )}
+        <h1>Admin Panel</h1>
+        <nav>
+          <a href="/">Home</a>
+
+          {auth.user && (
+            <button
+              onClick={() => {
+                localStorage.removeItem("user");
+                window.location.reload();
+              }}
+            >
+              Logout
+            </button>
+          )}
+        </nav>
       </header>
       <main>{props.children}</main>
     </>
