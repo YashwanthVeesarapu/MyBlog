@@ -75,7 +75,7 @@ export default async function page({ params }: any) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: data.title.charAt(0).toUpperCase() + data.title.substr(1),
+    headline: data.title?.charAt(0).toUpperCase() + data.title?.substr(1),
     description: data.description,
     url: "https://redsols.com/blog/" + params.title,
     author: {
@@ -106,7 +106,7 @@ export default async function page({ params }: any) {
       ></script>
       <meta
         itemProp="headline"
-        content={data.title.charAt(0).toUpperCase() + data.title.substr(1)}
+        content={data.title?.charAt(0).toUpperCase() + data.title?.substr(1)}
       />
       <div dangerouslySetInnerHTML={{ __html: data?.info || "" }} />
 

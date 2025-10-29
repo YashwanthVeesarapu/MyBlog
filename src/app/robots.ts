@@ -3,27 +3,30 @@ import { MetadataRoute } from "next";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
+      // Default rule for all crawlers
       {
         userAgent: "*",
-        disallow: ["/admin/", "/api/", "/private/"], // Blocks sensitive areas
+        disallow: ["/admin/", "/api/", "/private/"],
       },
-      {
-        userAgent: "BadBot",
-        disallow: ["/"], // Blocks all access for "BadBot"
-      },
-      {
-        userAgent: "AhrefsBot",
-        disallow: ["/"], // Blocks all access for "AhrefsBot"
-      },
-      {
-        userAgent: "SemrushBot",
-        disallow: ["/"], // Blocks all access for "SemrushBot"
-      },
-      {
-        userAgent: "meta-externalagent",
-        disallow: ["/"], // Blocks all access for "meta-externalagent"
-      },
+
+      // Known aggressive or spammy bots
+      { userAgent: "BadBot", disallow: ["/"] },
+      { userAgent: "AhrefsBot", disallow: ["/"] },
+      { userAgent: "SemrushBot", disallow: ["/"] },
+      { userAgent: "meta-externalagent", disallow: ["/"] },
+      { userAgent: "meta-webindexer", disallow: ["/"] },
+      { userAgent: "MJ12bot", disallow: ["/"] },
+      { userAgent: "PetalBot", disallow: ["/"] },
+      { userAgent: "DataForSeoBot", disallow: ["/"] },
+      { userAgent: "CCBot", disallow: ["/"] },
+      { userAgent: "GPTBot", disallow: ["/"] },
+      { userAgent: "ChatGPT-User", disallow: ["/"] },
+      { userAgent: "Scrapy", disallow: ["/"] },
+      { userAgent: "Python-requests", disallow: ["/"] },
+      { userAgent: "curl", disallow: ["/"] },
+      { userAgent: "wget", disallow: ["/"] },
     ],
+
     sitemap: "https://blog.redsols.com/sitemap.xml",
   };
 }
