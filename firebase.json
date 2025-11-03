@@ -26,29 +26,23 @@
         ]
       }
     ],
-    "redirects": [
+    "rewrites": [
       {
         "source": "/blog/**/blog/**",
-        "destination": "/404.html",
-        "type": 404
+        "destination": "/404.html"
       },
       {
         "source": "/**/bot/**",
-        "destination": "/404.html",
-        "type": 404
+        "destination": "/404.html"
       },
       {
         "source": "/**/crawler/**",
-        "destination": "/404.html",
-        "type": 404
+        "destination": "/404.html"
       },
       {
         "source": "/**/scraper/**",
-        "destination": "/404.html",
-        "type": 404
-      }
-    ],
-    "rewrites": [
+        "destination": "/404.html"
+      },
       {
         "source": "**",
         "destination": "/index.html"
