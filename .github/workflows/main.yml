@@ -34,12 +34,10 @@ jobs:
       - name: Build the Next.js app
         run: npm run build
 
-      - name: Authenticate with Google Cloud
-        run: |
-          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" | base64 --decode > ${{ github.workspace }}/key.json
-
       - name: Deploy to Firebase Hosting
-        run: |
-          npx firebase deploy --only hosting
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/key.json
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FB_SERVICE_ACCOUNT }}"
+          channelId: live
+          projectId: blogbyredsols
