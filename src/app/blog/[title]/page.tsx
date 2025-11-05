@@ -13,7 +13,7 @@ export async function generateStaticParams() {
   const data: any = await blogs.json();
 
   return data.map((blog: any) => ({
-    title: blog.title.split(" ").join("-"),
+    title: blog.title.replace(/\n/g, "").replace(/\s+/g, "-").toLowerCase(),
     description: blog.description,
     info: blog.info,
   }));
@@ -30,9 +30,12 @@ export async function generateMetadata(
   const { title: slug } = params;
 
   // ✅ Use the correct API path (no extra /blog prefix)
-  const blogRes = await fetch(apiInstance.getUri() + `/blogs/post/${slug}`, {
-    next: { revalidate: REVALIDATE },
-  });
+  const blogRes = await fetch(
+    apiInstance.getUri() + `/blog/blogs/post/${slug}`,
+    {
+      next: { revalidate: REVALIDATE },
+    }
+  );
 
   const data: any = await blogRes.json();
 
@@ -69,6 +72,18 @@ export async function generateMetadata(
 export default async function page({ params }: any) {
   let url = apiInstance.getUri() + `/blog/blogs/post/${params.title}`;
   let blog: any = await fetch(url, { next: { revalidate: REVALIDATE } });
+
+  if (!blog.ok) {
+    return (
+      <MainLayout>
+        <div className="blog">
+          <h1>Blog Not Found</h1>
+          <p>The blog you are looking for does not exist.</p>
+        </div>
+      </MainLayout>
+    );
+  }
+
   const data = await blog.json();
 
   // Add JSON-LD for SEO
