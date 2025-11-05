@@ -4,6 +4,8 @@ import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { apiInstance } from "@/services";
 
+import "./page.scss";
+
 const REVALIDATE = 60; // adjust if needed
 
 export async function generateStaticParams() {
