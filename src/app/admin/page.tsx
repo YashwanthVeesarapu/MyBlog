@@ -1,7 +1,7 @@
 "use client";
 
 import Admin from "@/components/Admin";
-import { AuthProvider, useAuth } from "@/components/AuthProvider";
+import { AuthProvider } from "@/components/AuthProvider";
 import AuthLayout from "@/layouts/AuthLayout";
 import { Suspense } from "react";
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./styles.scss";
 import { apiInstance } from "@/services";
@@ -13,6 +13,16 @@ const Login = () => {
     uid: string;
     token: string;
   });
+
+  const handleOAuthRedirect = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const base = apiInstance.defaults.baseURL || "";
+    const redirectUri = encodeURIComponent(
+      `${window.location.origin}/auth/callback`
+    );
+    const authorizeUrl = `${base}/auth/v2/authorize?redirect_uri=${redirectUri}&response_type=code&client_id=client_rxaNO1l7aXkwBTyALteqOA`;
+    window.location.assign(authorizeUrl);
+  };
 
   const verifyCode = async (code: string) => {
     if (code == null) {
@@ -72,10 +82,20 @@ const Login = () => {
       {!openVerificationModal && (
         <div className="login">
           <h2>Login</h2>
+
+          <div className="oauth-section">
+            <button className="oauth-button" onClick={handleOAuthRedirect}>
+              Login with Redsols OAuth
+            </button>
+            <div className="divider">
+              <span>or</span>
+            </div>
+          </div>
+
           <form onSubmit={handleLogin}>
             <input type="text" placeholder="email" />
             <input type="password" placeholder="password" />
-            <input type="submit" />
+            <input type="submit" value="Login" />
           </form>
         </div>
       )}

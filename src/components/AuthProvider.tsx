@@ -1,4 +1,5 @@
 import { apiInstance } from "@/services";
+import { get } from "http";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type User = {
@@ -20,24 +21,26 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null | undefined>(undefined);
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      let localUser = JSON.parse(user);
-      let token = localUser.token;
-      const payload = JSON.parse(atob(token.split(".")[1]));
-
-      if (payload.exp < Date.now() / 1000 - 60 * 60 * 2) {
-        localStorage.removeItem("user");
-        localUser = null;
+  const getCurrentUser = () => {
+    const user = apiInstance
+      .get("/blog/auth/me", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          const userData: User = res.data;
+          setUser(userData);
+        } else {
+          setUser(null);
+        }
+      })
+      .catch((err) => {
         setUser(null);
-        return;
-      }
+      });
+  };
 
-      setUser(localUser);
-    } else {
-      setUser(null);
-    }
+  useEffect(() => {
+    getCurrentUser();
   }, []);
 
   return (

@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 if (dev) {
-  url = "http://127.0.0.1:8000";
+  url = "http://localhost:8000";
 }
 
 export const apiInstance = axios.create({
