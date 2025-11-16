@@ -124,9 +124,7 @@ const Admin = () => {
           category,
         },
         {
-          headers: {
-            Authorization: `Bearer ${auth.user.token}`,
-          },
+          withCredentials: true,
         }
       )
       .then(() => {
