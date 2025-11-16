@@ -86,9 +86,7 @@ const Admin = () => {
           category,
         },
         {
-          headers: {
-            Authorization: `Bearer ${auth.user.token}`,
-          },
+          withCredentials: true,
         }
       )
       .then(() => {
@@ -153,7 +151,9 @@ const Admin = () => {
     router.push(`/admin?edit=${id}`);
 
     const data = await apiInstance
-      .get(`/blog/blogs/post/${id}`)
+      .get(`/blog/blogs/post/${id}`, {
+        withCredentials: true,
+      })
       .then((res) => res.data);
     setInfo(data.info);
     setTitle(data.title);

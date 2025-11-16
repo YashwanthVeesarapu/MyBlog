@@ -16,8 +16,7 @@ const AuthLayout = (props: any) => {
           {auth.user && (
             <button
               onClick={() => {
-                localStorage.removeItem("user");
-                window.location.reload();
+                auth.logout();
               }}
             >
               Logout

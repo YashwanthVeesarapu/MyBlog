@@ -14,6 +14,7 @@ interface AuthProviderProps {
 
 interface AuthContextType {
   user: User | null | undefined;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -39,12 +40,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
   };
 
+  const logout = () => {
+    apiInstance
+      .post(
+        "/blog/auth/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        setUser(null);
+      })
+      .catch((err) => {
+        console.error("Logout error:", err);
+      });
+  };
+
   useEffect(() => {
     getCurrentUser();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, logout }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
@@ -57,7 +77,7 @@ export const useAuth = () => {
 };
 
 export const login = async (email: string, password: string) => {
-  const user: User = await apiInstance.post("/blog/auth/users/login", {
+  const user: User = await apiInstance.post("/blog/auth/login", {
     email,
     password,
   });
