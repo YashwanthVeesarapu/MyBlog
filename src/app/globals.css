@@ -85,29 +85,51 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
-[data-theme="dark"] {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+html {
+  scroll-behavior: smooth;
+}
 
-  --tile-start-rgb: 2, 13, 46;
-  --tile-end-rgb: 2, 5, 19;
-  --tile-border: conic-gradient(
-    #ffffff80,
-    #ffffff40,
-    #ffffff30,
-    #ffffff20,
-    #ffffff10,
-    #ffffff10,
-    #ffffff80
-  );
+body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+}
 
-  --callout-rgb: 20, 20, 20;
-  --callout-border-rgb: 108, 108, 108;
-  --card-rgb: 100, 100, 100;
-  --card-border-rgb: 200, 200, 200;
+/* Prevent any child elements from causing overflow */
+#__next,
+#__next > *,
+main,
+section,
+div {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix for potential grid/flex overflow */
+.grid,
+.flex,
+[style*="grid"],
+[style*="flex"] {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix for any absolute positioned elements */
+.glow::after,
+.glow::before {
+  content: "";
+  top: 60%;
+  left: 50%;
+  position: absolute;
+  filter: blur(45px);
+  transform: translateZ(0);
+  z-index: -1;
+  max-width: 100vw;
+  right: auto;
 }
 
 body {
