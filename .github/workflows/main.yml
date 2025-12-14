@@ -12,6 +12,12 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch or ref to run"
+        required: true
+        default: "main"
 
 jobs:
   build:
