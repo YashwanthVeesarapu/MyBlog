@@ -188,9 +188,15 @@ const Admin = () => {
   return (
     <div className="admin-root">
       {auth.user && !openCreateModal && !openEditModal && (
-        <div>
-          <div className="blog-container">
+        <div className="admin-dashboard">
+          <div className="admin-toolbar">
+            <div className="admin-title">
+              <h2>Blogs</h2>
+              <p>Manage posts and open any blog to edit.</p>
+            </div>
             <Button
+              variant="contained"
+              className="create-button"
               onClick={() => {
                 setOpenCreateModal(true);
                 setTitle("");
@@ -200,17 +206,19 @@ const Admin = () => {
             >
               Create Blog
             </Button>
+          </div>
 
-            <h2>Blogs</h2>
-            <div>
+          <div className="blog-container">
+            <div className="blog-list">
               {blogs.map((element: Blog) => (
-                <div
+                <button
+                  type="button"
                   className="blog-list-item"
                   key={element.title}
                   onClick={() => editBlog(element.title.split(" ").join("-"))}
                 >
-                  <p> {element.title}</p>
-                </div>
+                  <span>{element.title}</span>
+                </button>
               ))}
             </div>
           </div>
@@ -222,17 +230,13 @@ const Admin = () => {
 
       {openEditModal && (
         <>
-          <div className={`hellobello ${isEditorCollapsed ? "collapsed" : ""}`}>
-            <div className={"hello"}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: 8,
-                }}
-              >
-                <h2 style={{ margin: 0 }}>Edit Blog</h2>
+          <div className={`admin-editor ${isEditorCollapsed ? "collapsed" : ""}`}>
+            <div className="editor-panel">
+              <div className="editor-header">
+                <div>
+                  <h2>Edit Blog</h2>
+                  <p>Changes appear instantly in the preview.</p>
+                </div>
                 <Button
                   size="small"
                   variant="outlined"
@@ -244,28 +248,35 @@ const Admin = () => {
               </div>
               <form
                 onSubmit={(e: any) => handleEditSubmit(e)}
-                className={"container"}
+                className="editor-form"
               >
                 <Input
                   name="title"
                   value={title}
                   placeholder="Title"
+                  className="editor-input"
+                  disableUnderline
                   onChange={(e) => setTitle(e.target.value)}
                 />
                 <Input
                   value={description}
                   name="description"
                   placeholder="Description"
+                  className="editor-input"
+                  disableUnderline
                   onChange={(e) => setDescription(e.target.value)}
                 />
                 <Input
                   value={author}
                   name="author"
                   placeholder="Author"
+                  className="editor-input"
+                  disableUnderline
                   onChange={(e) => setAuthor(e.target.value)}
                 />
                 <select
                   value={category}
+                  className="editor-select"
                   onChange={(e) => setCategory(e.target.value)}
                 >
                   {BLOG_CATEGORIES.map((cat) => (
@@ -279,146 +290,166 @@ const Admin = () => {
                   value={info}
                   name="info"
                   placeholder="Html"
+                  className="editor-textarea"
                   onChange={(e) => setInfo(e.target.value)}
-                  minRows={3}
+                  minRows={6}
                 />
 
-                {/* Submit Button */}
-                <Button
-                  variant={"contained"}
-                  type="submit"
-                  value="Submit"
-                  className="submit-button"
-                >
-                  {loading ? <CircularProgress /> : "Submit"}
-                </Button>
+                <div className="editor-actions">
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    value="Submit"
+                    className="submit-button"
+                  >
+                    {loading ? <CircularProgress size={20} /> : "Save Changes"}
+                  </Button>
 
-                <Button
-                  variant={"contained"}
-                  onClick={() => closeModal("edit")}
-                  className="submit-button"
-                >
-                  Cancel
-                </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() => closeModal("edit")}
+                    className="submit-button"
+                  >
+                    Cancel
+                  </Button>
+                </div>
               </form>
             </div>
 
-            <div className={"viewer"}>
-              <div
-                className="blog"
-                dangerouslySetInnerHTML={{ __html: info || "" }}
-              />
+            <div className="preview-panel">
+              <div className="preview-header">
+                <h3>Live Preview</h3>
+                <span>Matches the blog page styling.</span>
+              </div>
+              <div className="preview-body">
+                <div
+                  className="blog"
+                  dangerouslySetInnerHTML={{ __html: info || "" }}
+                />
+              </div>
             </div>
           </div>
           <Button
             className="editor-toggle-handle"
-            onClick={() => setIsEditorCollapsed(false)}
+            onClick={() => setIsEditorCollapsed((s) => !s)}
+            aria-pressed={isEditorCollapsed}
           >
-            Show Editor
+            {isEditorCollapsed ? "Show Editor" : "Hide Editor"}
           </Button>
         </>
       )}
 
       {openCreateModal && (
         <>
-          <div className={`hellobello ${isEditorCollapsed ? "collapsed" : ""}`}>
-            <div className={"hello"}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: 8,
-                }}
-              >
-                <h2 style={{ margin: 0 }}>Edit Blog</h2>
+          <div className={`admin-editor ${isEditorCollapsed ? "collapsed" : ""}`}>
+            <div className="editor-panel">
+              <div className="editor-header">
+                <div>
+                  <h2>Create Blog</h2>
+                  <p>Draft the post and review the live preview.</p>
+                </div>
                 <Button
                   size="small"
                   variant="outlined"
                   onClick={() => setIsEditorCollapsed((s) => !s)}
                   aria-pressed={isEditorCollapsed}
                 >
-                  Hide Editor
+                  {isEditorCollapsed ? "Show Editor" : "Hide Editor"}
                 </Button>
               </div>
-              <div className="scrollable">
-                <form
-                  onSubmit={(e: any) => handleSubmit(e)}
-                  className={"container"}
+              <form
+                onSubmit={(e: any) => handleSubmit(e)}
+                className="editor-form"
+              >
+                <Input
+                  name="title"
+                  placeholder="Title"
+                  className="editor-input"
+                  disableUnderline
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <Input
+                  type="hidden"
+                  name="id"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                />
+                <Input
+                  name="description"
+                  placeholder="Description"
+                  className="editor-input"
+                  disableUnderline
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+
+                <select
+                  value={category}
+                  className="editor-select"
+                  onChange={(e) => setCategory(e.target.value)}
                 >
-                  <Input
-                    name="title"
-                    placeholder="Title"
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                  <Input
-                    type="hidden"
-                    name="id"
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                  />
-                  <Input
-                    name="description"
-                    placeholder="Description"
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
+                  {BLOG_CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
 
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  >
-                    {BLOG_CATEGORIES.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
+                <Input
+                  name="author"
+                  placeholder="Author"
+                  className="editor-input"
+                  disableUnderline
+                  onChange={(e) => setAuthor(e.target.value)}
+                />
 
-                  <Input
-                    name="author"
-                    placeholder="Author"
-                    onChange={(e) => setAuthor(e.target.value)}
-                  />
+                <TextareaAutosize
+                  name="info"
+                  placeholder="Html"
+                  className="editor-textarea"
+                  onChange={(e) => setInfo(e.target.value)}
+                  minRows={6}
+                />
 
-                  <TextareaAutosize
-                    name="info"
-                    placeholder="Html"
-                    onChange={(e) => setInfo(e.target.value)}
-                    minRows={3}
-                  />
-
-                  {/* Submit Button */}
+                <div className="editor-actions">
                   <Button
-                    variant={"contained"}
+                    variant="contained"
                     type="submit"
                     value="Submit"
                     className="submit-button"
                   >
-                    {loading ? <CircularProgress /> : "Submit"}
+                    {loading ? <CircularProgress size={20} /> : "Publish"}
                   </Button>
                   <Button
-                    variant={"contained"}
+                    variant="outlined"
                     onClick={() => closeModal("create")}
                     className="submit-button"
                   >
                     Cancel
                   </Button>
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
 
-            <div className={"viewer"}>
-              <div dangerouslySetInnerHTML={{ __html: info || "" }} />
+            <div className="preview-panel">
+              <div className="preview-header">
+                <h3>Live Preview</h3>
+                <span>Matches the blog page styling.</span>
+              </div>
+              <div className="preview-body">
+                <div
+                  className="blog"
+                  dangerouslySetInnerHTML={{ __html: info || "" }}
+                />
+              </div>
             </div>
           </div>
-          {isEditorCollapsed && (
-            <Button
-              className="editor-toggle-handle"
-              onClick={() => setIsEditorCollapsed(false)}
-            >
-              Show Editor
-            </Button>
-          )}
+          <Button
+            className="editor-toggle-handle"
+            onClick={() => setIsEditorCollapsed((s) => !s)}
+            aria-pressed={isEditorCollapsed}
+          >
+            {isEditorCollapsed ? "Show Editor" : "Hide Editor"}
+          </Button>
         </>
       )}
     </div>
