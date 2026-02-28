@@ -1,6 +1,8 @@
 {
   "name": "Blog by Redsols",
   "short_name": "RedBlog",
+  "description": "Insights from exploring technology and beyond - Redsols Blog",
+  "start_url": "/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +15,10 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#990000",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en"
 }

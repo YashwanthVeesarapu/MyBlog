@@ -5,21 +5,40 @@ import MainLayout from "./../layouts/MainLayout";
 import Link from "next/link";
 import { Blog } from "@/models/blog.model";
 import { apiInstance } from "@/services";
+import { BLOG_CATEGORIES } from "@/constants/blog";
+import { Metadata } from "next";
 
-const BLOG_CATEGORIES = [
-  "",
-  "Technology",
-  "Health",
-  "Travel",
-  "Food",
-  "Lifestyle",
-  "Education",
-  "Finance",
-  "Entertainment",
-  "Sports",
-  "Science",
-  "Software",
-];
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "Discover insightful articles on software engineering, product thinking, and productivity. Redsols Blog offers valuable perspectives for developers, product leaders, and tech professionals.",
+  alternates: {
+    canonical: "https://blog.redsols.com",
+  },
+  openGraph: {
+    title: "Blog by Redsols - Insights on Technology & Software",
+    description:
+      "Discover insightful articles on software engineering, product thinking, and productivity.",
+    url: "https://blog.redsols.com",
+    siteName: "Blog by Redsols",
+    type: "website",
+    images: [
+      {
+        url: "/android-chrome-512x512.png",
+        width: 512,
+        height: 512,
+        alt: "Blog by Redsols",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog by Redsols - Insights on Technology & Software",
+    description:
+      "Discover insightful articles on software engineering, product thinking, and productivity.",
+    images: ["/android-chrome-512x512.png"],
+  },
+};
 
 export default async function Home() {
   const data: Blog[] = await getData();

@@ -90,6 +90,7 @@ h2 {
     gap: 1rem;
 
     input[type="text"],
+    input[type="email"],
     input[type="password"] {
       padding: 1rem;
       border: 1px solid rgba(var(--callout-border-rgb), 0.3);
@@ -133,4 +134,17 @@ h2 {
 
 .verification {
   // ...existing verification styles...
+}
+
+// Accessibility: visually hidden but accessible to screen readers
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

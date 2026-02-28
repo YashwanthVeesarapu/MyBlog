@@ -1,7 +1,31 @@
 import MainLayout from "@/layouts/MainLayout";
 import React from "react";
+import { Metadata } from "next";
 
 import "./styles.scss";
+
+export const metadata: Metadata = {
+  title: "About Us | Blog by Redsols",
+  description:
+    "Learn about Redsols Blog - a knowledge hub sharing practical insights, research-driven perspectives, and guidance on software engineering, product thinking, and productivity.",
+  alternates: {
+    canonical: "https://blog.redsols.com/about",
+  },
+  openGraph: {
+    title: "About Us | Blog by Redsols",
+    description:
+      "Learn about Redsols Blog - a knowledge hub sharing practical insights and guidance on modern technology.",
+    url: "https://blog.redsols.com/about",
+    siteName: "Blog by Redsols",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | Blog by Redsols",
+    description:
+      "Learn about Redsols Blog - a knowledge hub sharing practical insights and guidance on modern technology.",
+  },
+};
 
 const page = () => {
   return (

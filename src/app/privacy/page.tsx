@@ -1,7 +1,31 @@
 import MainLayout from "@/layouts/MainLayout";
 import React from "react";
+import { Metadata } from "next";
 
 import "./styles.scss";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Blog by Redsols",
+  description:
+    "Privacy Policy for Redsols Blog. Learn how we collect, use, and protect your personal information when you use our services.",
+  alternates: {
+    canonical: "https://blog.redsols.com/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy | Blog by Redsols",
+    description:
+      "Privacy Policy for Redsols Blog - learn how we handle your personal information.",
+    url: "https://blog.redsols.com/privacy",
+    siteName: "Blog by Redsols",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Blog by Redsols",
+    description:
+      "Privacy Policy for Redsols Blog - learn how we handle your personal information.",
+  },
+};
 
 const page = () => {
   return (

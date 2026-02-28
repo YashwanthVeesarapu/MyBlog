@@ -1,7 +1,31 @@
 import MainLayout from "@/layouts/MainLayout";
 import React from "react";
+import { Metadata } from "next";
 
 import "./styles.scss";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | Blog by Redsols",
+  description:
+    "Terms of Service for Redsols Blog. Read our terms and conditions for using our services and accessing our content.",
+  alternates: {
+    canonical: "https://blog.redsols.com/terms",
+  },
+  openGraph: {
+    title: "Terms of Service | Blog by Redsols",
+    description:
+      "Terms of Service for Redsols Blog - terms and conditions for using our services.",
+    url: "https://blog.redsols.com/terms",
+    siteName: "Blog by Redsols",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms of Service | Blog by Redsols",
+    description:
+      "Terms of Service for Redsols Blog - terms and conditions for using our services.",
+  },
+};
 
 const page = () => {
   return (

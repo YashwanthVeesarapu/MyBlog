@@ -94,7 +94,9 @@ export default async function page({ params }: any) {
     "@type": "BlogPosting",
     headline: data.title?.charAt(0).toUpperCase() + data.title?.substr(1),
     description: data.description,
-    url: "https://redsols.com/blog/" + params.title,
+    url: "https://blog.redsols.com/blog/" + params.title,
+    datePublished: data.created_at,
+    dateModified: data.last_updated,
     author: {
       "@type": "Person",
       name: data.author,
@@ -105,14 +107,44 @@ export default async function page({ params }: any) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": "https://redsols.com/blog/" + params.title,
+      "@id": "https://blog.redsols.com/blog/" + params.title,
     },
     publisher: {
       "@type": "Organization",
       name: "Redsols",
       url: "https://redsols.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://blog.redsols.com/android-chrome-512x512.png",
+      },
     },
-    dateModified: data.last_updated,
+    image: "https://blog.redsols.com/android-chrome-512x512.png",
+  };
+
+  // Breadcrumb structured data
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://blog.redsols.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://blog.redsols.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: data.title?.charAt(0).toUpperCase() + data.title?.substr(1),
+        item: "https://blog.redsols.com/blog/" + params.title,
+      },
+    ],
   };
 
   return (
@@ -120,6 +152,12 @@ export default async function page({ params }: any) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      ></script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd),
+        }}
       ></script>
       <meta
         itemProp="headline"

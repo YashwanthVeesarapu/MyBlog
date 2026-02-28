@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Poppins({
@@ -9,10 +8,129 @@ const inter = Poppins({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://blog.redsols.com";
+
 export const metadata: Metadata = {
-  title: "Blog by Redsols",
+  title: {
+    default: "Blog by Redsols",
+    template: "%s | Blog by Redsols",
+  },
   description:
     "Explore the vibrant world of Redsols Blog, where insightful articles and engaging content come together to enlighten and entertain. From the latest trends to in-depth analyses, our blog covers a diverse range of topics, offering valuable insights and expert perspectives. Join us on a journey of discovery as we share knowledge, inspiration, and captivating stories. Redsols Blog – Your go-to destination for enriching content that goes beyond the ordinary.",
+  keywords: [
+    "Redsols",
+    "blog",
+    "software engineering",
+    "product thinking",
+    "technology",
+    "productivity",
+    "development",
+    "programming",
+  ],
+  authors: [{ name: "Redsols", url: "https://redsols.com" }],
+  creator: "Redsols",
+  publisher: "Redsols",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
+  alternates: {
+    canonical: SITE_URL,
+    types: {
+      "application/rss+xml": `${SITE_URL}/feed.xml`,
+    },
+  },
+  openGraph: {
+    title: "Blog by Redsols",
+    description: "Explore the vibrant world of Redsols Blog.",
+    url: SITE_URL,
+    siteName: "Blog by Redsols",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/android-chrome-512x512.png",
+        width: 512,
+        height: 512,
+        alt: "Blog by Redsols",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog by Redsols",
+    description: "Explore the vibrant world of Redsols Blog.",
+    site: "@redsols",
+    creator: "@redsols",
+    images: ["/android-chrome-512x512.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google1e7802d650aead96.html",
+    other: {
+      "impact-site-verification": "c05f4ee4-3f67-48bb-b824-df87f4073e24",
+    },
+  },
+  category: "technology",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#990000",
+};
+
+// Organization JSON-LD schema
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Redsols",
+  url: "https://redsols.com",
+  logo: "https://blog.redsols.com/android-chrome-512x512.png",
+  sameAs: [
+    "https://twitter.com/redsols",
+    "https://www.linkedin.com/company/redsols",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "blog@redsols.com",
+    contactType: "customer service",
+  },
+};
+
+// Website JSON-LD schema
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Blog by Redsols",
+  url: SITE_URL,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export default async function RootLayout({
@@ -22,34 +140,18 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="dark">
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
         />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
-        <meta
-          name="impact-site-verification"
-          content="c05f4ee4-3f67-48bb-b824-df87f4073e24"
-        />
-        <meta property="og:title" content="Blog by Redsols" />
-        <meta
-          property="og:description"
-          content="Explore the vibrant world of Redsols Blog."
-        />
-        <meta property="og:image" content="/path-to-image.jpg" />
-        <link rel="canonical" href="https://blog.redsols.com" />
-      </Head>
+      </head>
       <body className={inter.className}>{children}</body>
       {/* <script
         async

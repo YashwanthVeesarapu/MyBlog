@@ -1,4 +1,5 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import DOMPurify from "dompurify";
 import { useAuth } from "../AuthProvider";
 
 import { Blog } from "@/models/blog.model";
@@ -12,34 +13,18 @@ import {
   TextareaAutosize,
 } from "@mui/material";
 import Login from "../Login";
-import { apiInstance } from "@/services";
+import { blogApi } from "@/services";
 import { useRouter, useSearchParams } from "next/navigation";
-
-const BLOG_CATEGORIES = [
-  "",
-  "Technology",
-  "Health",
-  "Travel",
-  "Food",
-  "Lifestyle",
-  "Education",
-  "Finance",
-  "Entertainment",
-  "Sports",
-  "Science",
-  "Software",
-];
+import { BLOG_CATEGORIES } from "@/constants/blog";
 
 const Admin = () => {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const auth = useAuth();
   const router = useRouter();
 
   // query param edit
   const queryParams = useSearchParams();
   const editParam = queryParams.get("edit");
-
-  const [editData, setEditData] = useState({} as any);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -60,7 +45,7 @@ const Admin = () => {
   const [isEditorCollapsed, setIsEditorCollapsed] = useState(false);
 
   const fetchBlogs = async () => {
-    const data = await apiInstance.get("/blog/blogs").then((res) => res.data);
+    const data = await blogApi.getAll();
     setBlogs(data);
   };
 
@@ -75,20 +60,14 @@ const Admin = () => {
 
     let lowerCaseTitle = title.trim().toLowerCase();
 
-    apiInstance
-      .post(
-        "/blog/blogs",
-        {
-          title: lowerCaseTitle,
-          description,
-          info,
-          author,
-          category,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+    blogApi
+      .create({
+        title: lowerCaseTitle,
+        description,
+        info,
+        author,
+        category,
+      })
       .then(() => {
         alert("Success");
         setTitle("");
@@ -101,8 +80,10 @@ const Admin = () => {
 
         closeModal("create");
       })
-      .catch((e) => alert(e));
-    setLoading(false);
+      .catch((e) => alert(e))
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const handleEditSubmit = async (e: React.FormEvent) => {
@@ -113,20 +94,14 @@ const Admin = () => {
     e.preventDefault();
     setLoading(true);
 
-    await apiInstance
-      .put(
-        `/blog/blogs/${id}`,
-        {
-          title,
-          description,
-          info,
-          author,
-          category,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+    await blogApi
+      .update(id, {
+        title,
+        description,
+        info,
+        author,
+        category,
+      })
       .then(() => {
         alert("Success");
         setTitle("");
@@ -140,19 +115,17 @@ const Admin = () => {
 
         closeModal("edit");
       })
-      .catch((e) => alert(e));
-    setLoading(false);
+      .catch((e) => alert(e))
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const editBlog = async (id: string) => {
+  const editBlog = useCallback(async (id: string) => {
     // navigate to edit url
     router.push(`/admin?edit=${id}`);
 
-    const data = await apiInstance
-      .get(`/blog/blogs/post/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => res.data);
+    const data = await blogApi.getBySlug(id);
     setInfo(data.info);
     setTitle(data.title);
     setDescription(data.description);
@@ -161,26 +134,25 @@ const Admin = () => {
     setAuthor(data.author);
     setIsEditorCollapsed(false);
     setOpenEditModal(true);
-  };
+  }, [router]);
 
-  const closeModal = (which: string = "edit") => {
+  const closeModal = useCallback((which: string = "edit") => {
     if (which === "edit") {
       setOpenEditModal(false);
     } else {
       setOpenCreateModal(false);
     }
     router.push("/admin");
-  };
+  }, [router]);
 
   useEffect(() => {
     if (editParam) {
       editBlog(editParam);
     } else {
-      console.log(editParam);
       closeModal("edit");
       closeModal("create");
     }
-  }, [editParam]);
+  }, [editParam, editBlog, closeModal]);
 
   useEffect(() => {
     fetchBlogs();
@@ -324,7 +296,7 @@ const Admin = () => {
               <div className="preview-body">
                 <div
                   className="blog"
-                  dangerouslySetInnerHTML={{ __html: info || "" }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(info || "") }}
                 />
               </div>
             </div>
@@ -438,7 +410,7 @@ const Admin = () => {
               <div className="preview-body">
                 <div
                   className="blog"
-                  dangerouslySetInnerHTML={{ __html: info || "" }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(info || "") }}
                 />
               </div>
             </div>

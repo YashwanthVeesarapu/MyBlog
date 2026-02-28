@@ -93,8 +93,26 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleLogin}>
-            <input type="text" placeholder="email" />
-            <input type="password" placeholder="password" />
+            <label htmlFor="login-email" className="visually-hidden">
+              Email
+            </label>
+            <input
+              id="login-email"
+              type="email"
+              placeholder="Email"
+              autoComplete="email"
+              required
+            />
+            <label htmlFor="login-password" className="visually-hidden">
+              Password
+            </label>
+            <input
+              id="login-password"
+              type="password"
+              placeholder="Password"
+              autoComplete="current-password"
+              required
+            />
             <input type="submit" value="Login" />
           </form>
         </div>
