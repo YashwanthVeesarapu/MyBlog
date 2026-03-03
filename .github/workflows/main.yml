@@ -22,8 +22,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${{github.workspace}}/key.json
 
     steps:
       - name: Checkout code
@@ -47,3 +45,8 @@ jobs:
           firebaseServiceAccount: "${{ secrets.FB_SERVICE_ACCOUNT }}"
           projectId: blogbyredsols
           channelId: live
+
+      - name: Submit Sitemap to Google Indexing API
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.FB_SERVICE_ACCOUNT }}
+        run: node .github/scripts/submit-sitemap.js
