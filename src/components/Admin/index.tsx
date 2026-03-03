@@ -129,9 +129,9 @@ const Admin = () => {
     setInfo(data.info);
     setTitle(data.title);
     setDescription(data.description);
-    setCategory(data.category);
-    setId(data._id);
-    setAuthor(data.author);
+    setCategory(data.category || "");
+    setId(data._id || "");
+    setAuthor(data.author || "");
     setIsEditorCollapsed(false);
     setOpenEditModal(true);
   }, [router]);

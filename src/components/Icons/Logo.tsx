@@ -4,10 +4,12 @@ const Logo = ({
   height,
   width,
   fill,
+  alt,
 }: {
   height: string;
   width: string;
   fill: string;
+  alt?: string;
 }) => {
   return (
     <svg
