@@ -20,7 +20,7 @@ const Login = () => {
     const redirectUri = encodeURIComponent(
       `${window.location.origin}/auth/callback`
     );
-    const authorizeUrl = `${base}/auth/v2/authorize?redirect_uri=${redirectUri}&response_type=code&client_id=client_rxaNO1l7aXkwBTyALteqOA`;
+    const authorizeUrl = `${base}/auth/v2/authorize?redirect_uri=${redirectUri}&response_type=code&client_id=${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`;
     window.location.assign(authorizeUrl);
   };
 
@@ -35,13 +35,6 @@ const Login = () => {
       .post("/blog/auth/verify-code", { uid, code, token })
       .then((res) => {
         if (res.data.message == "code_verified") {
-          localStorage.setItem(
-            "user",
-            JSON.stringify({
-              uid: res.data.uid,
-              token: res.data.token,
-            })
-          );
           window.location.reload();
           alert("Account verified");
         } else {

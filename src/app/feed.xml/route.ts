@@ -15,7 +15,7 @@ export async function GET() {
 
     const rssItems = items
       .map((blog: any) => {
-        const slug = blog.title
+        const slug = blog.slug || blog.title
           .replace(/\n/g, "")
           .replace(/\s+/g, "-")
           .toLowerCase();

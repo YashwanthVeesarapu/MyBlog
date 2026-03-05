@@ -82,6 +82,4 @@ export const login = async (email: string, password: string) => {
   });
 
   apiInstance.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
-
-  localStorage.setItem("user", JSON.stringify(user));
 };

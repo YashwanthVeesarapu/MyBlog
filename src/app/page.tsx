@@ -79,9 +79,8 @@ export default async function Home() {
           {sortedCategories.map((category) => (
             <section
               key={category}
-              className={`category-section ${
-                category === "Software" ? "featured-category" : ""
-              }`}
+              className={`category-section ${category === "Software" ? "featured-category" : ""
+                }`}
             >
               <div className="category-header">
                 <h2 className="category-title">
@@ -122,7 +121,11 @@ export default async function Home() {
 }
 
 const getData = async () => {
-  const data = await apiInstance.get("/blog/blogs").then((res) => res.data);
-
-  return data;
+  try {
+    const data = await apiInstance.get("/blog/blogs").then((res) => res.data);
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch blogs:", error);
+    return [];
+  }
 };

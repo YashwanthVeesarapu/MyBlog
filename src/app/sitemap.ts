@@ -12,10 +12,11 @@ export default async function sitemap() {
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split("T")[0];
 
-  const blogsSitemap = items.map(({ title }: any) => {
+  const blogsSitemap = items.map((post: any) => {
+    const slug = post.slug || post.title.replace(/\n/g, "").replace(/\s+/g, "-").toLowerCase();
     return {
-      url: URL + "blog/" + title.split(" ").join("-") + "/",
-      lastModified: formattedDate,
+      url: URL + "blog/" + slug + "/",
+      lastModified: post.last_updated ? new Date(post.last_updated).toISOString().split("T")[0] : formattedDate,
       priority: 0.8,
       changeFrequency: "weekly",
     };

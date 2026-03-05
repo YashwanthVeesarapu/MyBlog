@@ -3,6 +3,7 @@ import MainLayout from "@/layouts/MainLayout";
 import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { apiInstance } from "@/services";
+import DOMPurify from "isomorphic-dompurify";
 
 import "./page.scss";
 
@@ -15,7 +16,7 @@ export async function generateStaticParams() {
   const data: any = await blogs.json();
 
   return data.map((blog: any) => ({
-    title: blog.title.replace(/\n/g, "").replace(/\s+/g, "-").toLowerCase(),
+    title: blog.slug || blog.title.replace(/\n/g, "").replace(/\s+/g, "-").toLowerCase(),
     description: blog.description,
     info: blog.info,
   }));
@@ -163,7 +164,7 @@ export default async function page({ params }: any) {
         itemProp="headline"
         content={data.title?.charAt(0).toUpperCase() + data.title?.substr(1)}
       />
-      <div dangerouslySetInnerHTML={{ __html: data?.info || "" }} />
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.info || "") }} />
 
       <div className="bottom">
         {data?.last_updated && (
