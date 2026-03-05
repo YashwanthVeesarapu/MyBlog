@@ -4,7 +4,8 @@ export default async function sitemap() {
   const call = await fetch(SERVER_URL, { next: { revalidate: 3600 } });
   const blogs = await call.json();
 
-  const items = Array.isArray(blogs) ? blogs : blogs?.data || [];
+  const rawItems = Array.isArray(blogs) ? blogs : blogs?.data || [];
+  const items = rawItems.filter((post: any) => !post.deleted && post.title);
 
   const URL = "https://blog.redsols.com/";
 
