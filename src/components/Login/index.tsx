@@ -20,7 +20,7 @@ const Login = () => {
     const redirectUri = encodeURIComponent(
       `${window.location.origin}/auth/callback`
     );
-    const authorizeUrl = `${base}/auth/v2/authorize?redirect_uri=${redirectUri}&response_type=code&client_id=${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`;
+    const authorizeUrl = `${base}/auth/authorize?redirect_uri=${redirectUri}&response_type=code&client_id=${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`;
     window.location.assign(authorizeUrl);
   };
 
