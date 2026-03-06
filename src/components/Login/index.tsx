@@ -16,7 +16,7 @@ const Login = () => {
 
   const handleOAuthRedirect = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const base = apiInstance.defaults.baseURL || "";
+    const base = process.env.NEXT_PUBLIC_AUTH_URL || "https://auth.redsols.com";
     const redirectUri = encodeURIComponent(
       `${window.location.origin}/auth/callback`
     );
