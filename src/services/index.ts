@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Blog, CreateBlogDto, UpdateBlogDto } from "@/models/blog.model";
 
-const isDevelopment = process.env.NODE_ENV === "development";
+let isDevelopment = process.env.NODE_ENV === "development";
+isDevelopment = false;
 const baseUrl = isDevelopment
   ? process.env.NEXT_PUBLIC_API_URL_DEV || "http://localhost:8000"
   : process.env.NEXT_PUBLIC_API_URL || "https://api.redsols.com";
