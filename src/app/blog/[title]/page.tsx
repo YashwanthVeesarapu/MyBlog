@@ -1,9 +1,10 @@
-import MainLayout from "@/layouts/MainLayout";
-
 import React from "react";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { apiInstance } from "@/services";
 import DOMPurify from "isomorphic-dompurify";
+import { BLOG_SITE_URL, getBlogSlug, getBlogUrl } from "@/lib/blog";
+import { Blog } from "@/models/blog.model";
 
 import "./page.scss";
 
@@ -13,89 +14,80 @@ export async function generateStaticParams() {
   let url = apiInstance.getUri() + "/blog/blogs";
   const blogs = await fetch(url, { next: { revalidate: REVALIDATE } });
 
-  const data: any = await blogs.json();
+  const data: Blog[] = await blogs.json();
 
-  return data.map((blog: any) => ({
-    title: blog.slug || blog.title.replace(/\n/g, "").replace(/\s+/g, "-").toLowerCase(),
-    description: blog.description,
-    info: blog.info,
+  return data.map((blog) => ({
+    title: getBlogSlug(blog),
   }));
 }
 
 type Props = {
-  params: { title: string; description: string; info: string };
+  params: { title: string };
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+async function getBlogBySlug(slug: string): Promise<Blog | null> {
+  const response = await fetch(apiInstance.getUri() + `/blog/blogs/post/${slug}`, {
+    next: { revalidate: REVALIDATE },
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  return response.json();
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { title: slug } = params;
+  const data = await getBlogBySlug(slug);
 
-  // ✅ Use the correct API path (no extra /blog prefix)
-  const blogRes = await fetch(
-    apiInstance.getUri() + `/blog/blogs/post/${slug}`,
-    {
-      next: { revalidate: REVALIDATE },
-    }
-  );
+  if (!data) {
+    return {
+      title: "Blog Not Found",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
 
-  const data: any = await blogRes.json();
-
-  // ✅ Human-readable title
-  const formattedTitle = slug
-    .split("-")
-    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-    .join(" ");
-
-  // ✅ Build absolute URL once
-  const canonicalUrl = `https://blog.redsols.com/blog/${slug}`;
+  const canonicalUrl = getBlogUrl(data);
 
   return {
-    title: formattedTitle,
+    title: data.title,
     description: data.description,
     alternates: {
-      canonical: canonicalUrl, // ✅ add canonical
+      canonical: canonicalUrl,
     },
     openGraph: {
-      title: formattedTitle,
+      title: data.title,
       description: data.description,
-      type: "article", // better than "website" for blog posts
+      type: "article",
       url: canonicalUrl,
       siteName: "Blog by Redsols",
     },
     twitter: {
       card: "summary_large_image",
-      title: formattedTitle,
+      title: data.title,
       description: data.description,
     },
   };
 }
 
-export default async function page({ params }: any) {
-  let url = apiInstance.getUri() + `/blog/blogs/post/${params.title}`;
-  let blog: any = await fetch(url, { next: { revalidate: REVALIDATE } });
+export default async function page({ params }: Props) {
+  const data = await getBlogBySlug(params.title);
 
-  if (!blog.ok) {
-    return (
-      <MainLayout>
-        <div className="blog">
-          <h1>Blog Not Found</h1>
-          <p>The blog you are looking for does not exist.</p>
-        </div>
-      </MainLayout>
-    );
+  if (!data) {
+    notFound();
   }
-
-  const data = await blog.json();
 
   // Add JSON-LD for SEO
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: data.title?.charAt(0).toUpperCase() + data.title?.substr(1),
+    headline: data.title,
     description: data.description,
-    url: "https://blog.redsols.com/blog/" + params.title,
+    url: `${BLOG_SITE_URL}/blog/${params.title}`,
     datePublished: data.created_at,
     dateModified: data.last_updated,
     author: {
@@ -108,7 +100,7 @@ export default async function page({ params }: any) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": "https://blog.redsols.com/blog/" + params.title,
+      "@id": `${BLOG_SITE_URL}/blog/${params.title}`,
     },
     publisher: {
       "@type": "Organization",
@@ -131,19 +123,19 @@ export default async function page({ params }: any) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://blog.redsols.com",
+        item: BLOG_SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: "https://blog.redsols.com",
+        item: BLOG_SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: data.title?.charAt(0).toUpperCase() + data.title?.substr(1),
-        item: "https://blog.redsols.com/blog/" + params.title,
+        name: data.title,
+        item: `${BLOG_SITE_URL}/blog/${params.title}`,
       },
     ],
   };
@@ -162,7 +154,7 @@ export default async function page({ params }: any) {
       ></script>
       <meta
         itemProp="headline"
-        content={data.title?.charAt(0).toUpperCase() + data.title?.substr(1)}
+        content={data.title}
       />
       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.info || "") }} />
 

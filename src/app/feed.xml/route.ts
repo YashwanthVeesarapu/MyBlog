@@ -1,7 +1,7 @@
 import { apiInstance } from "@/services";
+import { BLOG_SITE_URL, getBlogSlug } from "@/lib/blog";
 import { NextResponse } from "next/server";
 
-const SITE_URL = "https://blog.redsols.com";
 const SITE_TITLE = "Blog by Redsols";
 const SITE_DESCRIPTION =
   "Explore the vibrant world of Redsols Blog, where insightful articles and engaging content come together to enlighten and entertain.";
@@ -15,10 +15,7 @@ export async function GET() {
 
     const rssItems = items
       .map((blog: any) => {
-        const slug = blog.slug || blog.title
-          .replace(/\n/g, "")
-          .replace(/\s+/g, "-")
-          .toLowerCase();
+        const slug = getBlogSlug(blog);
         const pubDate = blog.created_at
           ? new Date(blog.created_at).toUTCString()
           : new Date().toUTCString();
@@ -26,8 +23,8 @@ export async function GET() {
         return `
     <item>
       <title><![CDATA[${blog.title}]]></title>
-      <link>${SITE_URL}/blog/${slug}/</link>
-      <guid isPermaLink="true">${SITE_URL}/blog/${slug}/</guid>
+      <link>${BLOG_SITE_URL}/blog/${slug}/</link>
+      <guid isPermaLink="true">${BLOG_SITE_URL}/blog/${slug}/</guid>
       <description><![CDATA[${blog.description || ""}]]></description>
       <pubDate>${pubDate}</pubDate>
       <author>${blog.author || "Redsols"}</author>
@@ -39,11 +36,11 @@ export async function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>${SITE_TITLE}</title>
-    <link>${SITE_URL}</link>
+    <link>${BLOG_SITE_URL}</link>
     <description>${SITE_DESCRIPTION}</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="${BLOG_SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
     <copyright>Copyright ${new Date().getFullYear()} Redsols</copyright>
     <managingEditor>blog@redsols.com (Redsols)</managingEditor>
     <webMaster>blog@redsols.com (Redsols)</webMaster>

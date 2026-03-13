@@ -5,8 +5,8 @@ import MainLayout from "./../layouts/MainLayout";
 import Link from "next/link";
 import { Blog } from "@/models/blog.model";
 import { apiInstance } from "@/services";
-import { BLOG_CATEGORIES } from "@/constants/blog";
 import { Metadata } from "next";
+import { getBlogSlug } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -99,7 +99,7 @@ export default async function Home() {
                 {blogsByCategory[category].map((blog: Blog) => (
                   <Link
                     key={blog._id || blog.title}
-                    href={`/blog/${blog.title.split(" ").join("-")}/`}
+                    href={`/blog/${getBlogSlug(blog)}/`}
                     className="blog-card"
                   >
                     <h3 className="blog-title">{blog.title}</h3>

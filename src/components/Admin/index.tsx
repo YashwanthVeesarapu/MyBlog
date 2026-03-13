@@ -16,6 +16,7 @@ import Login from "../Login";
 import { blogApi } from "@/services";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BLOG_CATEGORIES } from "@/constants/blog";
+import { getBlogSlug } from "@/lib/blog";
 
 const Admin = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -187,7 +188,7 @@ const Admin = () => {
                   type="button"
                   className="blog-list-item"
                   key={element.title}
-                  onClick={() => editBlog(element.title.split(" ").join("-"))}
+                  onClick={() => editBlog(getBlogSlug(element))}
                 >
                   <span>{element.title}</span>
                 </button>

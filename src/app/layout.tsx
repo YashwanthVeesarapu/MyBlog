@@ -2,13 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { BLOG_SITE_URL } from "@/lib/blog";
 
 const inter = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
-
-const SITE_URL = "https://blog.redsols.com";
 
 export const metadata: Metadata = {
   title: {
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(BLOG_SITE_URL),
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -46,15 +45,15 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   alternates: {
-    canonical: SITE_URL,
+    canonical: BLOG_SITE_URL,
     types: {
-      "application/rss+xml": `${SITE_URL}/feed.xml`,
+      "application/rss+xml": `${BLOG_SITE_URL}/feed.xml`,
     },
   },
   openGraph: {
     title: "Blog by Redsols",
     description: "Explore the vibrant world of Redsols Blog.",
-    url: SITE_URL,
+    url: BLOG_SITE_URL,
     siteName: "Blog by Redsols",
     type: "website",
     locale: "en_US",
@@ -87,7 +86,6 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "google1e7802d650aead96.html",
     other: {
       "impact-site-verification": "c05f4ee4-3f67-48bb-b824-df87f4073e24",
     },
@@ -122,15 +120,7 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Blog by Redsols",
-  url: SITE_URL,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
+  url: BLOG_SITE_URL,
 };
 
 export default async function RootLayout({
