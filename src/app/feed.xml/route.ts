@@ -7,6 +7,21 @@ const SITE_DESCRIPTION =
   "Explore the vibrant world of Redsols Blog, where insightful articles and engaging content come together to enlighten and entertain.";
 
 export async function GET() {
+  const emptyRss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>${SITE_TITLE}</title>
+    <link>${BLOG_SITE_URL}</link>
+    <description>${SITE_DESCRIPTION}</description>
+    <language>en-us</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <atom:link href="${BLOG_SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+    <copyright>Copyright ${new Date().getFullYear()} Redsols</copyright>
+    <managingEditor>blog@redsols.com (Redsols)</managingEditor>
+    <webMaster>blog@redsols.com (Redsols)</webMaster>
+  </channel>
+</rss>`;
+
   try {
     const response = await apiInstance.get("/blog/blogs");
     const blogs = response.data;
@@ -56,6 +71,11 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Error generating RSS feed:", error);
-    return new NextResponse("Error generating RSS feed", { status: 500 });
+    return new NextResponse(emptyRss, {
+      headers: {
+        "Content-Type": "application/xml; charset=utf-8",
+        "Cache-Control": "public, max-age=300, s-maxage=300",
+      },
+    });
   }
 }

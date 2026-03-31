@@ -11,14 +11,23 @@ import "./page.scss";
 const REVALIDATE = 60; // adjust if needed
 
 export async function generateStaticParams() {
-  let url = apiInstance.getUri() + "/blog/blogs";
-  const blogs = await fetch(url, { next: { revalidate: REVALIDATE } });
+  try {
+    const url = apiInstance.getUri() + "/blog/blogs";
+    const blogs = await fetch(url, { next: { revalidate: REVALIDATE } });
 
-  const data: Blog[] = await blogs.json();
+    if (!blogs.ok) {
+      return [];
+    }
 
-  return data.map((blog) => ({
-    title: getBlogSlug(blog),
-  }));
+    const data: Blog[] = await blogs.json();
+
+    return data.map((blog) => ({
+      title: getBlogSlug(blog),
+    }));
+  } catch (error) {
+    console.error("Failed to generate static blog params:", error);
+    return [];
+  }
 }
 
 type Props = {
@@ -26,15 +35,20 @@ type Props = {
 };
 
 async function getBlogBySlug(slug: string): Promise<Blog | null> {
-  const response = await fetch(apiInstance.getUri() + `/blog/blogs/post/${slug}`, {
-    next: { revalidate: REVALIDATE },
-  });
+  try {
+    const response = await fetch(apiInstance.getUri() + `/blog/blogs/post/${slug}`, {
+      next: { revalidate: REVALIDATE },
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return null;
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error(`Failed to fetch blog post for slug "${slug}":`, error);
     return null;
   }
-
-  return response.json();
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

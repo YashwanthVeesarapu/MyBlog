@@ -30,51 +30,51 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <MainLayout>
-      <div className="about">
-        <h2>About</h2>
-        <p>
-          Welcome to Redsols Blog, the official knowledge hub from Redsols. We
-          share practical insights, research-driven perspectives, and guidance
-          designed to help teams and professionals navigate modern technology
-          and digital work.
-        </p>
-        <p>
-          Our goal is to deliver clear, actionable content across software
-          engineering, product thinking, and productivity. We focus on topics
-          that help readers make better decisions, build reliable solutions, and
-          stay current in a fast-moving industry.
-        </p>
-        <p>
-          Every article is shaped by real-world experience and a commitment to
-          quality. We prioritize clarity over hype and aim to provide resources
-          you can apply immediately, whether you&apos;re leading a team or
-          sharpening your own skills.
-        </p>
+      <div className="content-page about-page">
+        <section className="content-page__intro">
+          <span className="eyebrow">About Redsols Blog</span>
+          <h1>Practical writing for teams building modern products.</h1>
+          <p>
+            Redsols Blog is the company&apos;s editorial space for software
+            engineering, product thinking, and the operational judgment behind
+            reliable digital work.
+          </p>
+        </section>
 
-        <p>
-          Redsols Blog is also a space for thoughtful dialogue. We welcome
-          feedback, questions, and collaboration from our readers and partners
-          as we continue to expand the content and areas we cover.{" "}
-        </p>
+        <section className="content-page__section">
+          <h2>What we publish</h2>
+          <p>
+            We focus on clear, applied writing that helps readers make better
+            decisions, ship more confidently, and stay grounded in real-world
+            execution rather than hype.
+          </p>
+          <p>
+            Every article is shaped by hands-on experience. The goal is not
+            volume, but useful signal: practical ideas you can apply to your
+            own product, engineering, or operational work.
+          </p>
+        </section>
 
-        <p>
-          Whether you&apos;re a product leader, a developer, or a business
-          stakeholder, our aim is to provide a trusted source of perspective and
-          practical guidance.{" "}
-        </p>
-        <p>
-          Thank you for reading and for being part of the Redsols community. We
-          look forward to connecting and sharing what we learn.
-        </p>
+        <section className="content-page__section">
+          <h2>Who it is for</h2>
+          <p>
+            The readership spans product leaders, developers, founders, and
+            stakeholders who want a steadier, more thoughtful perspective on
+            technology and digital execution.
+          </p>
+          <p>
+            If you value clarity, craft, and durable systems over noise, you
+            are in the right place.
+          </p>
+        </section>
 
-        <br />
-        <h3>Contact Us</h3>
-
-        <p>
-          You can reach out to us via{" "}
-          <a href="mailto:blog@redsols.com">blog@redsols.com</a>. We are always
-          open to collaborations, suggestions, and discussions.
-        </p>
+        <section className="content-page__contact">
+          <h2>Contact</h2>
+          <p>
+            Reach out for collaboration, feedback, or thoughtful discussion.
+          </p>
+          <a href="mailto:blog@redsols.com">blog@redsols.com</a>
+        </section>
       </div>
     </MainLayout>
   );

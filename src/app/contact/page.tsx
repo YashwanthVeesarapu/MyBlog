@@ -2,6 +2,8 @@ import MainLayout from "@/layouts/MainLayout";
 import React from "react";
 import { Metadata } from "next";
 
+import "./styles.scss";
+
 export const metadata: Metadata = {
   title: "Contact Us | Blog by Redsols",
   description:
@@ -28,7 +30,22 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <MainLayout>
-      <p style={{ padding: "6em" }}> You can contact us at blog@redsols.com</p>
+      <div className="content-page">
+        <section className="content-page__intro">
+          <span className="eyebrow">Contact</span>
+          <h1>Start a conversation with the Redsols team.</h1>
+          <p>
+            Use the address below for collaboration, article feedback, or
+            general inquiries related to the blog.
+          </p>
+        </section>
+
+        <section className="content-page__contact">
+          <h2>Email</h2>
+          <p>We read and respond to thoughtful messages.</p>
+          <a href="mailto:blog@redsols.com">blog@redsols.com</a>
+        </section>
+      </div>
     </MainLayout>
   );
 };

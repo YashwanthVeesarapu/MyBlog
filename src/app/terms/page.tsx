@@ -30,54 +30,50 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <MainLayout>
-      <div className="terms">
-        <h1>Terms of Service</h1>
-        <p>
-          By using our services, you agree to comply with and be bound by the
-          following terms and conditions. Please read these terms carefully
-          before using our services.
-        </p>
-        <h2>1. Acceptance of Terms</h2>
-        <p>
-          By accessing or using our services, you agree to be bound by these
-          Terms of Service. If you do not agree to all the terms and conditions,
-          you must not use our services.
-        </p>
-        <h2>2. User Responsibilities</h2>
-        <p>When using our services, you agree not to:</p>
-        <ul>
-          <li>Violate any applicable laws or regulations.</li>
-          <li>Interfere with the proper functioning of our services.</li>
-          <li>
-            Engage in any activity that may compromise the security of our
-            systems.
-          </li>
-          <li>Submit false or misleading information.</li>
-        </ul>
-        <h2>3. Intellectual Property</h2>
-        <p>
-          All content and materials available on our services, including but not
-          limited to text, graphics, logos, images, and software, are the
-          property of Redsols and are protected by applicable intellectual
-          property laws.
-        </p>
-        <h2>4. Privacy</h2>
-        <p>
-          Your use of our services is also governed by our Privacy Policy.
-          Please review our Privacy Policy to understand how we collect, use,
-          and disclose your personal information.
-        </p>
-        <h2>5. Changes to Terms</h2>
-        <p>
-          We reserve the right to update or modify these Terms of Service at any
-          time without prior notice. Your continued use of our services after
-          any changes constitutes acceptance of the updated terms.
-        </p>
-        <h2>6. Contact Us</h2>
-        <p>
-          If you have any questions or concerns about these Terms of Service,
-          please contact us at blog@redsols.com.
-        </p>
+      <div className="content-page">
+        <section className="content-page__intro">
+          <span className="eyebrow">Terms</span>
+          <h1>Ground rules for using Redsols Blog and its published content.</h1>
+          <p>
+            Accessing or using this site means agreeing to the terms below. If
+            these terms do not work for you, do not use the service.
+          </p>
+        </section>
+
+        <section className="content-page__section">
+          <h2>Acceptance and use</h2>
+          <p>
+            By using this site, you agree to comply with applicable laws and to
+            use the service in a way that does not interfere with its normal operation.
+          </p>
+        </section>
+
+        <section className="content-page__section">
+          <h2>User responsibilities</h2>
+          <ul>
+            <li>Do not violate laws or regulations through your use of the site.</li>
+            <li>Do not disrupt the operation or security of the service.</li>
+            <li>Do not submit false or misleading information.</li>
+          </ul>
+        </section>
+
+        <section className="content-page__section">
+          <h2>Intellectual property and privacy</h2>
+          <p>
+            Site content, including text, graphics, logos, images, and software,
+            remains the property of Redsols unless stated otherwise and is
+            protected by applicable intellectual property laws.
+          </p>
+          <p>
+            Use of the service is also governed by the Privacy Policy published on this site.
+          </p>
+        </section>
+
+        <section className="content-page__contact">
+          <h2>Questions</h2>
+          <p>For questions about these terms, contact us at:</p>
+          <a href="mailto:blog@redsols.com">blog@redsols.com</a>
+        </section>
       </div>
     </MainLayout>
   );
