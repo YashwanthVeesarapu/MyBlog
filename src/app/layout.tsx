@@ -1,13 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { BLOG_SITE_URL } from "@/lib/blog";
-
-const inter = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -94,10 +88,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#990000",
+  themeColor: "#b03131",
 };
 
-// Organization JSON-LD schema
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -115,7 +108,6 @@ const organizationJsonLd = {
   },
 };
 
-// Website JSON-LD schema
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -129,7 +121,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en">
       <head>
         <script
           type="application/ld+json"
@@ -142,13 +134,10 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
-      <body className={inter.className}>{children}</body>
-      {/* <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3789101350622146"
-        crossOrigin="anonymous"
-      ></script> */}
-      <GoogleAnalytics gaId="G-KZ56NVRBEB" />
+      <body>
+        {children}
+        <GoogleAnalytics gaId="G-KZ56NVRBEB" />
+      </body>
     </html>
   );
 }
