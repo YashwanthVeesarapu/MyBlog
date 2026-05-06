@@ -16,7 +16,9 @@ header {
     font-weight: 100;
     font-size: 2em;
   }
-  div {
+  .left,
+  .middle,
+  .right {
     display: flex;
     flex: 1;
   }
@@ -40,9 +42,10 @@ header {
 }
 
 @media screen and (max-width: 768px) {
-  header {
+  .header {
     padding: 0 2em;
     width: 100%;
     min-width: auto;
   }
+}
 }

@@ -1,4 +1,4 @@
-.home-container {
+.homeContainer {
   display: flex;
   flex-direction: column;
   z-index: 2;
@@ -13,7 +13,7 @@
   }
 }
 
-.hero-section {
+.heroSection {
   text-align: center;
   margin-bottom: 2rem;
   padding: 1rem 0.5rem;
@@ -25,7 +25,7 @@
   }
 }
 
-.hero-title {
+.heroTitle {
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -39,7 +39,7 @@
   }
 }
 
-.hero-subtitle {
+.heroSubtitle {
   font-size: 1rem;
   opacity: 0.8;
   max-width: 600px;
@@ -50,7 +50,7 @@
   }
 }
 
-.categories-container {
+.categoriesContainer {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -60,7 +60,7 @@
   }
 }
 
-.category-section {
+.categorySection {
   position: relative;
   padding: 1rem 0.5rem;
   border-radius: 12px;
@@ -80,7 +80,7 @@
   }
 }
 
-.featured-category {
+.featuredCategory {
   border: 2px solid rgba(255, 51, 51, 0.4);
   background: linear-gradient(
     135deg,
@@ -93,7 +93,7 @@
   }
 }
 
-.category-header {
+.categoryHeader {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -109,7 +109,7 @@
   }
 }
 
-.category-title {
+.categoryTitle {
   font-size: 1.4rem;
   font-weight: 600;
   margin: 0;
@@ -127,7 +127,7 @@
   }
 }
 
-.featured-badge {
+.featuredBadge {
   font-size: 0.75rem;
   padding: 0.25rem 0.75rem;
   background: linear-gradient(to right, #ff3333 0%, #ff6666 100%);
@@ -137,7 +137,7 @@
   align-self: flex-start;
 }
 
-.blog-count {
+.blogCount {
   font-size: 0.9rem;
   opacity: 0.6;
   font-weight: normal;
@@ -148,7 +148,7 @@
   }
 }
 
-.blogs-grid {
+.blogsGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
@@ -164,7 +164,7 @@
   }
 }
 
-.blog-card {
+.blogCard {
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -190,7 +190,7 @@
   }
 }
 
-.blog-title {
+.blogTitle {
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0 0 0.75rem 0;
@@ -201,7 +201,7 @@
   }
 }
 
-.blog-description {
+.blogDescription {
   font-size: 0.85rem;
   opacity: 0.7;
   margin: 0 0 1rem 0;
@@ -218,7 +218,7 @@
   }
 }
 
-.read-more {
+.readMore {
   font-size: 0.85rem;
   color: #ff3333;
   font-weight: 500;

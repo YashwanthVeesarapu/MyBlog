@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Header from "@/components/Header/Header";
-import "./styles.scss";
+import styles from "./main-layout.module.scss";
 import Footer from "@/components/Footer/Footer";
 
 interface MainLayoutProps {
@@ -9,9 +9,9 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
-    <div className="main">
+    <div className={styles.main}>
       <Header />
-      <main>{children}</main>
+      <main className={styles.mainContainer}>{children}</main>
       <Footer />
     </div>
   );

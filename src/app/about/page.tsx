@@ -2,7 +2,7 @@ import MainLayout from "@/layouts/MainLayout";
 import React from "react";
 import { Metadata } from "next";
 
-import "./styles.scss";
+import styles from "./about.module.scss";
 
 export const metadata: Metadata = {
   title: "About Us | Blog by Redsols",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <MainLayout>
-      <div className="about">
+      <div className={styles.about}>
         <h2>About</h2>
         <p>
           Welcome to Redsols Blog, the official knowledge hub from Redsols. We

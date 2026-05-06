@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import "./styles.scss";
+import styles from "./login.module.scss";
 import { apiInstance } from "@/services";
 import CodeVerification from "../CodeVerification";
 
@@ -71,23 +71,23 @@ const Login = () => {
 
   return (
     <div>
-      <div className="verification" id="verification-div"></div>
+      <div className={styles.verification} id="verification-div"></div>
 
       {!openVerificationModal && (
-        <div className="login">
+        <div className={styles.login}>
           <h2>Login</h2>
 
-          <div className="oauth-section">
-            <button className="oauth-button" onClick={handleOAuthRedirect}>
+          <div className={styles.oauthSection}>
+            <button className={styles.oauthButton} onClick={handleOAuthRedirect}>
               Login with Redsols OAuth
             </button>
-            <div className="divider">
+            <div className={styles.divider}>
               <span>or</span>
             </div>
           </div>
 
           <form onSubmit={handleLogin}>
-            <label htmlFor="login-email" className="visually-hidden">
+            <label htmlFor="login-email" className={styles.visuallyHidden}>
               Email
             </label>
             <input
@@ -97,7 +97,7 @@ const Login = () => {
               autoComplete="email"
               required
             />
-            <label htmlFor="login-password" className="visually-hidden">
+            <label htmlFor="login-password" className={styles.visuallyHidden}>
               Password
             </label>
             <input

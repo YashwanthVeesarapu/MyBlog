@@ -1,4 +1,4 @@
-import "./page.scss";
+import styles from "./page.module.scss";
 
 import MainLayout from "./../layouts/MainLayout";
 
@@ -67,46 +67,46 @@ export default async function Home() {
 
   return (
     <MainLayout>
-      <div className="home-container">
-        <section className="hero-section">
-          <h1 className="hero-title">Welcome to Our Blog</h1>
-          <p className="hero-subtitle">
+      <div className={styles.homeContainer}>
+        <section className={styles.heroSection}>
+          <h1 className={styles.heroTitle}>Welcome to Our Blog</h1>
+          <p className={styles.heroSubtitle}>
             Insights from exploring technology and beyond
           </p>
         </section>
 
-        <div className="categories-container">
+        <div className={styles.categoriesContainer}>
           {sortedCategories.map((category) => (
             <section
               key={category}
-              className={`category-section ${category === "Software" ? "featured-category" : ""
+              className={`${styles.categorySection} ${category === "Software" ? styles.featuredCategory : ""
                 }`}
             >
-              <div className="category-header">
-                <h2 className="category-title">
+              <div className={styles.categoryHeader}>
+                <h2 className={styles.categoryTitle}>
                   {category}
                   {category === "Software" && (
-                    <span className="featured-badge">Our Specialty</span>
+                    <span className={styles.featuredBadge}>Our Specialty</span>
                   )}
                 </h2>
-                <span className="blog-count">
+                <span className={styles.blogCount}>
                   {blogsByCategory[category].length}{" "}
                   {blogsByCategory[category].length === 1 ? "post" : "posts"}
                 </span>
               </div>
 
-              <div className="blogs-grid">
+              <div className={styles.blogsGrid}>
                 {blogsByCategory[category].map((blog: Blog) => (
                   <Link
                     key={blog._id || blog.title}
                     href={`/blog/${getBlogSlug(blog)}/`}
-                    className="blog-card"
+                    className={styles.blogCard}
                   >
-                    <h3 className="blog-title">{blog.title}</h3>
+                    <h3 className={styles.blogTitle}>{blog.title}</h3>
                     {blog.description && (
-                      <p className="blog-description">{blog.description}</p>
+                      <p className={styles.blogDescription}>{blog.description}</p>
                     )}
-                    <span className="read-more">Read more →</span>
+                    <span className={styles.readMore}>Read more →</span>
                   </Link>
                 ))}
               </div>
@@ -114,7 +114,7 @@ export default async function Home() {
           ))}
         </div>
 
-        <div className="center"></div>
+        <div className={styles.center}></div>
       </div>
     </MainLayout>
   );

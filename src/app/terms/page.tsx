@@ -2,7 +2,7 @@ import MainLayout from "@/layouts/MainLayout";
 import React from "react";
 import { Metadata } from "next";
 
-import "./styles.scss";
+import styles from "./terms.module.scss";
 
 export const metadata: Metadata = {
   title: "Terms of Service | Blog by Redsols",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <MainLayout>
-      <div className="terms">
+      <div className={styles.terms}>
         <h1>Terms of Service</h1>
         <p>
           By using our services, you agree to comply with and be bound by the

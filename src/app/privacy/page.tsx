@@ -2,7 +2,7 @@ import MainLayout from "@/layouts/MainLayout";
 import React from "react";
 import { Metadata } from "next";
 
-import "./styles.scss";
+import styles from "./privacy.module.scss";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Blog by Redsols",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <MainLayout>
-      <div className="privacy">
+      <div className={styles.privacy}>
         <h1>Privacy Policy</h1>
 
         <p>

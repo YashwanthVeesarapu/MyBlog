@@ -1,7 +1,7 @@
 "use client";
 1;
 import { useEffect } from "react";
-import "./styles.scss";
+import styles from "./code-verification.module.scss";
 
 const CodeVerification = ({
   verifyCode,
@@ -10,7 +10,7 @@ const CodeVerification = ({
 }) => {
   useEffect(() => {
     let inputElements = document.querySelectorAll(
-      ".code-input"
+      `.${styles.codeInput}`
     ) as NodeListOf<HTMLInputElement>;
 
     inputElements.forEach((ele: HTMLInputElement, index: number) => {
@@ -47,18 +47,18 @@ const CodeVerification = ({
   });
 
   return (
-    <div className="verification" id="verification-div">
+    <div className={styles.verification} id="verification-div">
       <h2>Verification</h2>
       <form id="verification-form" className="content-area">
-        <fieldset className="number-code">
+        <fieldset className={styles.numberCode}>
           <legend>Security Code</legend>
           <div>
-            <input name="code" className="code-input" required />
-            <input name="code" className="code-input" required />
-            <input name="code" className="code-input" required />
-            <input name="code" className="code-input" required />
-            <input name="code" className="code-input" required />
-            <input name="code" className="code-input" required />
+            <input name="code" className={styles.codeInput} required />
+            <input name="code" className={styles.codeInput} required />
+            <input name="code" className={styles.codeInput} required />
+            <input name="code" className={styles.codeInput} required />
+            <input name="code" className={styles.codeInput} required />
+            <input name="code" className={styles.codeInput} required />
           </div>
         </fieldset>
         <button type="submit">Submit</button>

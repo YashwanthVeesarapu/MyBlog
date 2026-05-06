@@ -33,10 +33,10 @@ h2 {
     color: var(--foreground);
   }
 
-  .oauth-section {
+  .oauthSection {
     margin-bottom: 2rem;
 
-    .oauth-button {
+    .oauthButton {
       width: 100%;
       padding: 1rem;
       background: linear-gradient(135deg, #ff3333 0%, #ff6666 100%);
@@ -137,7 +137,7 @@ h2 {
 }
 
 // Accessibility: visually hidden but accessible to screen readers
-.visually-hidden {
+.visuallyHidden {
   position: absolute;
   width: 1px;
   height: 1px;

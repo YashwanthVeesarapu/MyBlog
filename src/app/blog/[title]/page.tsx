@@ -6,7 +6,7 @@ import DOMPurify from "isomorphic-dompurify";
 import { BLOG_SITE_URL, getBlogSlug, getBlogUrl } from "@/lib/blog";
 import { Blog } from "@/models/blog.model";
 
-import "./page.scss";
+import styles from "@/styles/blog-content.module.scss";
 
 const REVALIDATE = 60; // adjust if needed
 
@@ -141,7 +141,7 @@ export default async function page({ params }: Props) {
   };
 
   return (
-    <div className="blog" itemScope itemType="http://schema.org/BlogPosting">
+    <div className={styles.blog} itemScope itemType="http://schema.org/BlogPosting">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -156,16 +156,16 @@ export default async function page({ params }: Props) {
         itemProp="headline"
         content={data.title}
       />
-      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.info || "") }} />
+      <div className={styles.blog} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.info || "") }} />
 
-      <div className="bottom">
+      <div className={styles.bottom}>
         {data?.last_updated && (
-          <div className="last_updated">
+          <div className={styles.lastUpdated}>
             Last updated: {new Date(data.last_updated).toDateString()}
           </div>
         )}
 
-        <div className="author">
+        <div className={styles.author}>
           by{" "}
           {data?.author ? (
             <span
