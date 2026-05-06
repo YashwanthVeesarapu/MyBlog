@@ -11,7 +11,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <div className={styles.main}>
       <Header />
-      <main className={styles.mainContainer}>{children}</main>
+      <main className={styles.siteMain}>{children}</main>
       <Footer />
     </div>
   );

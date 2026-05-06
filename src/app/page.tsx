@@ -40,10 +40,33 @@ export const metadata: Metadata = {
   },
 };
 
+const getCategoryDescription = (category: string) => {
+  if (category === "Software") {
+    return "Deep dives on engineering choices, delivery quality, and the systems behind dependable software.";
+  }
+
+  if (category === "Uncategorized") {
+    return "Additional notes, essays, and practical perspectives that do not fit a single editorial lane.";
+  }
+
+  return `Essays and practical guidance collected under ${category.toLowerCase()}.`;
+};
+
+const formatDate = (date?: string) => {
+  if (!date) {
+    return "Editorial";
+  }
+
+  return new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+};
+
 export default async function Home() {
   const data: Blog[] = await getData();
 
-  // Group blogs by category
   const blogsByCategory = data.reduce(
     (acc: Record<string, Blog[]>, blog: Blog) => {
       const category = blog.category || "Uncategorized";
@@ -56,7 +79,6 @@ export default async function Home() {
     {}
   );
 
-  // Sort categories with Software first, then alphabetically
   const sortedCategories = Object.keys(blogsByCategory).sort((a, b) => {
     if (a === "Software") return -1;
     if (b === "Software") return 1;
@@ -65,34 +87,84 @@ export default async function Home() {
     return a.localeCompare(b);
   });
 
+  const totalPosts = data.length;
+  const featuredPosts = blogsByCategory.Software?.length ?? 0;
+
   return (
     <MainLayout>
       <div className={styles.homeContainer}>
-        <section className={styles.heroSection}>
-          <h1 className={styles.heroTitle}>Welcome to Our Blog</h1>
-          <p className={styles.heroSubtitle}>
-            Insights from exploring technology and beyond
-          </p>
+        <section className={styles.homeHero}>
+          <div className={styles.homeHeroContent}>
+            <span className={styles.eyebrow}>Redsols Blog</span>
+            <h1>
+              Thoughtful writing on software, product judgment, and modern
+              digital work.
+            </h1>
+            <p className={styles.homeHeroLede}>
+              Essays, guides, and practical notes for teams building reliable
+              products and making better technical decisions.
+            </p>
+
+            <div className={styles.homeHeroStats} aria-label="Site overview">
+              <div className={styles.homeStat}>
+                <strong>{totalPosts}</strong>
+                <span>published articles</span>
+              </div>
+              <div className={styles.homeStat}>
+                <strong>{sortedCategories.length}</strong>
+                <span>editorial categories</span>
+              </div>
+              <div className={styles.homeStat}>
+                <strong>{featuredPosts}</strong>
+                <span>software-focused posts</span>
+              </div>
+            </div>
+          </div>
+
+          <aside className={styles.homeHeroPanel}>
+            <span className={styles.homeHeroPanelLabel}>Featured archive</span>
+            <h2>Explore the software collection first.</h2>
+            <p>
+              It brings together the clearest engineering writing on the site,
+              including implementation guides, systems thinking, and delivery
+              quality.
+            </p>
+            <a href="#category-software" className={styles.homeHeroPanelLink}>
+              View software articles
+            </a>
+          </aside>
         </section>
 
         <div className={styles.categoriesContainer}>
-          {sortedCategories.map((category) => (
+          {sortedCategories.map((category, categoryIndex) => (
             <section
               key={category}
-              className={`${styles.categorySection} ${category === "Software" ? styles.featuredCategory : ""
-                }`}
+              id={`category-${category.toLowerCase().replace(/\s+/g, "-")}`}
+              className={`${styles.categorySection} ${category === "Software" ? styles.featuredCategory : ""}`}
             >
               <div className={styles.categoryHeader}>
-                <h2 className={styles.categoryTitle}>
-                  {category}
-                  {category === "Software" && (
-                    <span className={styles.featuredBadge}>Our Specialty</span>
-                  )}
-                </h2>
-                <span className={styles.blogCount}>
-                  {blogsByCategory[category].length}{" "}
-                  {blogsByCategory[category].length === 1 ? "post" : "posts"}
-                </span>
+                <div className={styles.categoryHeaderCopy}>
+                  <span className={styles.categoryKicker}>
+                    {category === "Software" ? "Featured archive" : "Category"}
+                  </span>
+                  <h2 className={styles.categoryTitle}>
+                    {category}
+                    {category === "Software" && (
+                      <span className={styles.featuredBadge}>Core Redsols focus</span>
+                    )}
+                  </h2>
+                  <p className={styles.categoryDescription}>
+                    {getCategoryDescription(category)}
+                  </p>
+                </div>
+
+                <div className={styles.categoryHeaderMeta}>
+                  <span className={styles.blogCount}>
+                    {blogsByCategory[category].length} {" "}
+                    {blogsByCategory[category].length === 1 ? "article" : "articles"}
+                  </span>
+                  <span className={styles.categoryOrder}>Section {categoryIndex + 1}</span>
+                </div>
               </div>
 
               <div className={styles.blogsGrid}>
@@ -101,20 +173,27 @@ export default async function Home() {
                     key={blog._id || blog.title}
                     href={`/blog/${getBlogSlug(blog)}/`}
                     className={styles.blogCard}
+                    aria-label={`Read article: ${blog.title}`}
                   >
+                    <div className={styles.blogCardMeta}>
+                      <span>{category}</span>
+                      <span>{formatDate(blog.last_updated || blog.created_at)}</span>
+                    </div>
+
                     <h3 className={styles.blogTitle}>{blog.title}</h3>
-                    {blog.description && (
-                      <p className={styles.blogDescription}>{blog.description}</p>
-                    )}
-                    <span className={styles.readMore}>Read more →</span>
+
+                    <p className={styles.blogDescription}>
+                      {blog.description ||
+                        "Read the full article for a practical Redsols perspective on the topic."}
+                    </p>
+
+                    <span className={styles.readMore}>Read article</span>
                   </Link>
                 ))}
               </div>
             </section>
           ))}
         </div>
-
-        <div className={styles.center}></div>
       </div>
     </MainLayout>
   );
