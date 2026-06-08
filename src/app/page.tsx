@@ -136,7 +136,7 @@ export default async function Home() {
         </section>
 
         <div className={styles.categoriesContainer}>
-          {sortedCategories.map((category, categoryIndex) => (
+          {sortedCategories.map((category) => (
             <section
               key={category}
               id={`category-${category.toLowerCase().replace(/\s+/g, "-")}`}
@@ -163,7 +163,6 @@ export default async function Home() {
                     {blogsByCategory[category].length} {" "}
                     {blogsByCategory[category].length === 1 ? "article" : "articles"}
                   </span>
-                  <span className={styles.categoryOrder}>Section {categoryIndex + 1}</span>
                 </div>
               </div>
 
