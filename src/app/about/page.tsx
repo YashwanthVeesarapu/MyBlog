@@ -30,51 +30,39 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <MainLayout>
-      <div className={styles.about}>
-        <h2>About</h2>
-        <p>
-          Welcome to Redsols Blog, the official knowledge hub from Redsols. We
-          share practical insights, research-driven perspectives, and guidance
-          designed to help teams and professionals navigate modern technology
-          and digital work.
-        </p>
-        <p>
-          Our goal is to deliver clear, actionable content across software
-          engineering, product thinking, and productivity. We focus on topics
-          that help readers make better decisions, build reliable solutions, and
-          stay current in a fast-moving industry.
-        </p>
-        <p>
-          Every article is shaped by real-world experience and a commitment to
-          quality. We prioritize clarity over hype and aim to provide resources
-          you can apply immediately, whether you&apos;re leading a team or
-          sharpening your own skills.
-        </p>
+      <div className={styles.aboutPage}>
+        <section className={styles.intro}>
+          <span className={styles.eyebrow}>About</span>
+          <h1 className={styles.title}>Thoughtful writing from Redsols.</h1>
+          <p className={styles.lead}>
+            Redsols Blog shares practical insights, research-driven
+            perspectives, and guidance for teams navigating modern technology
+            and digital work.
+          </p>
+        </section>
 
-        <p>
-          Redsols Blog is also a space for thoughtful dialogue. We welcome
-          feedback, questions, and collaboration from our readers and partners
-          as we continue to expand the content and areas we cover.{" "}
-        </p>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>What we publish</h2>
+          <p className={styles.text}>
+            Our focus is clear, actionable content across software engineering,
+            product thinking, and productivity. We aim to help readers make
+            better decisions, build reliable solutions, and stay current in a
+            fast-moving industry.
+          </p>
+          <p className={styles.text}>
+            Every article is shaped by real-world experience and a commitment
+            to quality. We prioritize clarity over hype and keep the writing
+            useful for both individual contributors and leaders.
+          </p>
+        </section>
 
-        <p>
-          Whether you&apos;re a product leader, a developer, or a business
-          stakeholder, our aim is to provide a trusted source of perspective and
-          practical guidance.{" "}
-        </p>
-        <p>
-          Thank you for reading and for being part of the Redsols community. We
-          look forward to connecting and sharing what we learn.
-        </p>
-
-        <br />
-        <h3>Contact Us</h3>
-
-        <p>
-          You can reach out to us via{" "}
-          <a href="mailto:blog@redsols.com">blog@redsols.com</a>. We are always
-          open to collaborations, suggestions, and discussions.
-        </p>
+        <section className={styles.contact}>
+          <h2 className={styles.sectionTitle}>Contact</h2>
+          <p className={styles.text}>
+            Reach us at <a href="mailto:blog@redsols.com">blog@redsols.com</a>
+            for collaboration, suggestions, or questions.
+          </p>
+        </section>
       </div>
     </MainLayout>
   );

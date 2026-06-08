@@ -4,7 +4,7 @@
   padding: 2rem 1rem;
   font-family: var(--font-mono);
   line-height: 1.8;
-  color: var(--foreground);
+  color: var(--text-default);
 
   h1,
   h2,
@@ -28,7 +28,7 @@
 
   h2 {
     font-size: 2rem;
-    border-bottom: 2px solid rgba(var(--callout-border-rgb), 0.3);
+    border-bottom: 2px solid var(--border-soft);
     padding-bottom: 0.5rem;
   }
 
@@ -42,17 +42,17 @@
   }
 
   a {
-    color: #ff3333;
+    color: var(--accent);
     text-decoration: underline;
     transition: color 0.3s ease;
 
     &:hover {
-      color: #ff6666;
+      color: var(--accent-strong);
     }
   }
 
   code {
-    background: rgba(var(--callout-rgb), 0.3);
+    background: var(--surface-soft);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -60,8 +60,8 @@
   }
 
   pre {
-    background: rgba(var(--callout-rgb), 0.1);
-    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+    background: var(--surface-card);
+    border: 1px solid var(--border-soft);
     border-radius: 8px;
     padding: 1.5rem;
     overflow-x: auto;
@@ -74,10 +74,10 @@
   }
 
   blockquote {
-    border-left: 4px solid #ff3333;
+    border-left: 4px solid var(--accent);
     margin: 2rem 0;
     padding: 1rem 1.5rem;
-    background: rgba(var(--callout-rgb), 0.1);
+    background: var(--surface-soft);
     border-radius: 0 8px 8px 0;
     font-style: italic;
   }
@@ -104,7 +104,7 @@
     width: 100%;
     border-collapse: collapse;
     margin: 2rem 0;
-    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+    border: 1px solid var(--border-soft);
     border-radius: 8px;
     overflow: hidden;
 
@@ -112,11 +112,11 @@
     td {
       padding: 0.75rem 1rem;
       text-align: left;
-      border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.2);
+      border-bottom: 1px solid var(--border-soft);
     }
 
     th {
-      background: rgba(var(--callout-rgb), 0.1);
+      background: var(--surface-soft);
       font-weight: 600;
     }
 
@@ -128,7 +128,7 @@
   .bottom {
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 2px solid rgba(var(--callout-border-rgb), 0.3);
+    border-top: 2px solid var(--border-soft);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -138,12 +138,12 @@
     opacity: 0.8;
 
     .lastUpdated {
-      color: rgba(var(--foreground), 0.7);
+      color: var(--text-muted);
     }
 
     .author {
       a {
-        color: #ff3333;
+        color: var(--accent);
         text-decoration: none;
         font-weight: 500;
 

@@ -30,74 +30,54 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <MainLayout>
-      <div className={styles.privacy}>
-        <h1>Privacy Policy</h1>
+      <div className={styles.privacyPage}>
+        <section className={styles.intro}>
+          <span className={styles.eyebrow}>Policy</span>
+          <h1 className={styles.title}>Privacy Policy</h1>
+          <p className={styles.lead}>
+            This policy explains how we collect, use, and handle personal
+            information when you use our services or visit our website.
+          </p>
+        </section>
 
-        <p>
-          This Privacy Policy describes how we collect, use, and handle your
-          personal information when you use our services or visit our website.
-        </p>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Information We Collect</h2>
+          <p className={styles.text}>We may collect:</p>
+          <ul className={styles.list}>
+            <li>Your name, email address, and contact details.</li>
+            <li>
+              Usage information such as log data, IP address, and device
+              details.
+            </li>
+            <li>Any other information you choose to provide voluntarily.</li>
+          </ul>
+        </section>
 
-        <h2>Information We Collect</h2>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>How We Use Your Information</h2>
+          <ul className={styles.list}>
+            <li>To provide and maintain our services.</li>
+            <li>To improve, personalize, and enhance your experience.</li>
+            <li>To respond to inquiries, comments, or feedback.</li>
+            <li>To send updates, promotions, and other relevant information.</li>
+          </ul>
+        </section>
 
-        <p>We may collect the following types of information:</p>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Security</h2>
+          <p className={styles.text}>
+            We take reasonable measures to protect your personal information,
+            but no method of transmission or storage is completely secure.
+          </p>
+        </section>
 
-        <ul>
-          <li>
-            Your name, email address, and other contact details when you sign up
-            for our services.
-          </li>
-          <li>
-            Information about your usage of our services, such as log data, IP
-            address, and device information.
-          </li>
-          <li>
-            Any other information you choose to provide to us voluntarily.
-          </li>
-        </ul>
-
-        <h2>How We Use Your Information</h2>
-
-        <p>We use the collected information for the following purposes:</p>
-
-        <ul>
-          <li>To provide and maintain our services.</li>
-          <li>To improve, personalize, and enhance your experience.</li>
-          <li>To respond to your inquiries, comments, or feedback.</li>
-          <li>
-            To send you updates, promotions, and other relevant information.
-          </li>
-        </ul>
-
-        <h2>Data Processing on Our Servers</h2>
-
-        <p>
-          All data is processed on our servers, and we do not use third-party
-          services for this purpose. We take measures to ensure the security and
-          confidentiality of your information.
-        </p>
-
-        <h2>Security</h2>
-
-        <p>
-          We prioritize the security of your personal information and take
-          reasonable measures to protect it. However, no method of transmission
-          over the internet or electronic storage is completely secure, and we
-          cannot guarantee absolute security.
-        </p>
-
-        <h2>Changes to This Privacy Policy</h2>
-
-        <p>
-          We reserve the right to update or change our Privacy Policy at any
-          time. Any changes will be effective immediately upon posting the
-          updated Privacy Policy on our website.
-        </p>
-
-        <p>
-          If you have any questions about this Privacy Policy, please contact us
-          at blog@redsols.com.
-        </p>
+        <section className={styles.contact}>
+          <h2 className={styles.sectionTitle}>Questions</h2>
+          <p className={styles.text}>
+            If you have questions, contact us at{" "}
+            <a href="mailto:blog@redsols.com">blog@redsols.com</a>.
+          </p>
+        </section>
       </div>
     </MainLayout>
   );

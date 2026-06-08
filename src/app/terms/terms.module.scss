@@ -1,1 +1,90 @@
-@import "../../styles/content-page.scss";
+.termsPage {
+  width: min(100%, 920px);
+  margin: 0 auto;
+  display: grid;
+  gap: 1.2rem;
+  padding-top: 1.35rem;
+}
+
+.intro,
+.section,
+.contact {
+  border: 1px solid var(--border-soft);
+  border-radius: 28px;
+  background: var(--surface-card);
+  box-shadow: var(--shadow-card);
+}
+
+.intro {
+  display: grid;
+  gap: 0.8rem;
+  padding: clamp(1.05rem, 3vw, 1.55rem);
+  background:
+    radial-gradient(circle at top right, rgba(176, 49, 49, 0.08), transparent 34%),
+    var(--surface-elevated);
+
+  .title {
+    font-size: clamp(1.8rem, 3.2vw, 2.75rem);
+    max-width: 18ch;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+  }
+
+  .lead {
+    max-width: 58ch;
+    color: var(--text-muted);
+    font-size: 0.96rem;
+    line-height: 1.75;
+  }
+}
+
+.section,
+.contact {
+  display: grid;
+  gap: 0.85rem;
+  padding: clamp(1.05rem, 3vw, 1.6rem);
+}
+
+.sectionTitle {
+  font-size: clamp(1.45rem, 3vw, 1.95rem);
+}
+
+.text {
+  color: var(--text-muted);
+  font-size: 0.96rem;
+}
+
+.list {
+  color: var(--text-muted);
+  font-size: 0.96rem;
+  padding-left: 1.25rem;
+
+  li + li {
+    margin-top: 0.5rem;
+  }
+}
+
+.contact a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.eyebrow {
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+  .termsPage {
+    padding-top: 1.1rem;
+  }
+
+  .intro,
+  .section,
+  .contact {
+    border-radius: 24px;
+  }
+}
