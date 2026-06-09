@@ -45,6 +45,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Clear stale fetch cache
+        run: rm -rf .next/cache/fetch-cache
+
       - name: Build the Next.js app
         run: npm run build
 
