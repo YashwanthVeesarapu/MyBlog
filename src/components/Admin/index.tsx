@@ -15,7 +15,7 @@ import {
 import Login from "../Login";
 import { blogApi } from "@/services";
 import { useRouter, useSearchParams } from "next/navigation";
-import { BLOG_CATEGORIES } from "@/constants/blog";
+import { BLOG_CATEGORIES, BLOG_REGIONS } from "@/constants/blog";
 import { getBlogSlug } from "@/lib/blog";
 
 const Admin = () => {
@@ -34,6 +34,7 @@ const Admin = () => {
 
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
+  const [region, setRegion] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -68,6 +69,7 @@ const Admin = () => {
         info,
         author,
         category,
+        region,
       })
       .then(() => {
         alert("Success");
@@ -76,6 +78,7 @@ const Admin = () => {
         setInfo("");
         setAuthor("");
         setCategory("");
+        setRegion("");
 
         fetchBlogs();
 
@@ -102,6 +105,7 @@ const Admin = () => {
         info,
         author,
         category,
+        region,
       })
       .then(() => {
         alert("Success");
@@ -111,6 +115,7 @@ const Admin = () => {
         setId("");
         setAuthor("");
         setCategory("");
+        setRegion("");
 
         fetchBlogs();
 
@@ -131,6 +136,7 @@ const Admin = () => {
     setTitle(data.title);
     setDescription(data.description);
     setCategory(data.category || "");
+    setRegion(data.region || "");
     setId(data._id || "");
     setAuthor(data.author || "");
     setIsEditorCollapsed(false);
@@ -259,6 +265,18 @@ const Admin = () => {
                   ))}
                 </select>
 
+                <select
+                  value={region}
+                  className={styles.editorSelect}
+                  onChange={(e) => setRegion(e.target.value)}
+                >
+                  {BLOG_REGIONS.map((item) => (
+                    <option key={item} value={item}>
+                      {item || "Region"}
+                    </option>
+                  ))}
+                </select>
+
                 <TextareaAutosize
                   value={info}
                   name="info"
@@ -363,6 +381,18 @@ const Admin = () => {
                   {BLOG_CATEGORIES.map((cat) => (
                     <option key={cat} value={cat}>
                       {cat}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  value={region}
+                  className={styles.editorSelect}
+                  onChange={(e) => setRegion(e.target.value)}
+                >
+                  {BLOG_REGIONS.map((item) => (
+                    <option key={item} value={item}>
+                      {item || "Region"}
                     </option>
                   ))}
                 </select>

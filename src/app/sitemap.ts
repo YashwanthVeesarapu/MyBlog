@@ -38,6 +38,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "daily",
         priority: 1,
       },
+      {
+        url: `${BLOG_SITE_URL}/india`,
+        lastModified: formattedDate,
+        changeFrequency: "weekly",
+        priority: 0.9,
+      },
       ...blogsSitemap,
     ];
   } catch (error) {
@@ -50,6 +56,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: formattedDate,
       changeFrequency: "daily",
       priority: 1,
+    },
+    {
+      url: `${BLOG_SITE_URL}/india`,
+      lastModified: formattedDate,
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
   ];
 }

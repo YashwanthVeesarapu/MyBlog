@@ -1,16 +1,12 @@
 export const BLOG_CATEGORIES = [
   "",
-  "Technology",
-  "Health",
-  "Travel",
-  "Food",
+  "Tech",
   "Lifestyle",
-  "Education",
-  "Finance",
-  "Entertainment",
-  "Sports",
-  "Science",
-  "Software",
+  "Issues",
 ] as const;
 
 export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
+
+export const BLOG_REGIONS = ["", "India", "Global"] as const;
+
+export type BlogRegion = (typeof BLOG_REGIONS)[number];

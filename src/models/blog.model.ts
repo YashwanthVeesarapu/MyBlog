@@ -4,6 +4,7 @@ export interface Blog {
   info: string;
   title: string;
   category?: string;
+  region?: string;
   description: string;
   author?: string;
   created_at?: string;
@@ -17,6 +18,7 @@ export interface CreateBlogDto {
   info: string;
   author?: string;
   category?: string;
+  region?: string;
 }
 
 export interface UpdateBlogDto {
@@ -25,4 +27,5 @@ export interface UpdateBlogDto {
   info?: string;
   author?: string;
   category?: string;
+  region?: string;
 }

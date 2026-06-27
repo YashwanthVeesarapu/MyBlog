@@ -19,6 +19,7 @@ const Footer: React.FC = () => {
           <div className={styles.siteFooterGroup}>
             <span className={styles.siteFooterLabel}>Explore</span>
             <Link href="/">Home</Link>
+            <Link href="/india">India</Link>
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>
           </div>
