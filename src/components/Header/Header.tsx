@@ -5,7 +5,6 @@ import Logo from "../Icons/Logo";
 
 const navigation = [
   { href: "/", label: "Home" },
-  { href: "/india", label: "India" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" },
