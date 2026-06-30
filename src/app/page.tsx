@@ -11,14 +11,14 @@ import { getBlogSlug } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Home",
   description:
-    "Discover thoughtful writing on tech, lifestyle, and consumer issues. Redsols Blog offers practical perspectives for readers who want clearer digital life guidance.",
+    "Discover thoughtful writing on tech, lifestyle, and practical essays. Redsols Blog offers clear perspectives for readers who want sharper digital life guidance.",
   alternates: {
     canonical: "https://blog.redsols.com",
   },
   openGraph: {
-    title: "Blog by Redsols - Tech, Lifestyle & Consumer Issues",
+    title: "Blog by Redsols - Tech, Lifestyle & Essays",
     description:
-      "Discover thoughtful writing on tech, lifestyle, and consumer issues.",
+      "Discover thoughtful writing on tech, lifestyle, and practical essays.",
     url: "https://blog.redsols.com",
     siteName: "Blog by Redsols",
     type: "website",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog by Redsols - Tech, Lifestyle & Consumer Issues",
+    title: "Blog by Redsols - Tech, Lifestyle & Essays",
     description:
-      "Discover thoughtful writing on tech, lifestyle, and consumer issues.",
+      "Discover thoughtful writing on tech, lifestyle, and practical essays.",
     images: ["/android-chrome-512x512.png"],
   },
 };
@@ -50,7 +50,7 @@ const getCategoryDescription = (category: string) => {
   }
 
   if (category === "Issues") {
-    return "Consumer problems, policy gaps, and service failures that deserve attention.";
+    return "Service gaps, product friction, and follow-ups that deserve attention.";
   }
 
   if (category === "Uncategorized") {
@@ -77,10 +77,7 @@ export default async function Home() {
 
   const blogsByCategory = data.reduce(
     (acc: Record<string, Blog[]>, blog: Blog) => {
-      const category =
-        blog.region?.toLowerCase() === "india" || blog.category?.toLowerCase() === "india"
-          ? "Issues"
-          : blog.category || "Uncategorized";
+      const category = blog.category || "Uncategorized";
       if (!acc[category]) {
         acc[category] = [];
       }
@@ -125,21 +122,21 @@ export default async function Home() {
                 <span>editorial categories</span>
               </div>
               <div className={styles.homeStat}>
-                <strong>{blogsByCategory["Issues"]?.length || 0}</strong>
-                <span>consumer issues posts</span>
+                <strong>{Object.keys(blogsByCategory).length}</strong>
+                <span>topic lanes</span>
               </div>
             </div>
           </div>
 
           <aside className={styles.homeHeroPanel}>
-            <span className={styles.homeHeroPanelLabel}>Consumer issues</span>
-            <h2>Consumer problems deserve a separate lane.</h2>
+            <span className={styles.homeHeroPanelLabel}>More to read</span>
+            <h2>More practical writing across software and everyday work.</h2>
             <p>
-              Posts about telecom, banking, UPI, identity, and other digital-life
-              problems are collected in one place for easier reading.
+              Essays on product choices, technical judgment, and everyday digital
+              work are collected here for easier reading.
             </p>
-            <a href="#category-issues" className={styles.homeHeroPanelLink}>
-              Open the issues section
+            <a href="#category-tech" className={styles.homeHeroPanelLink}>
+              Explore the categories
             </a>
           </aside>
         </section>
