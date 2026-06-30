@@ -11,14 +11,14 @@ import { getBlogSlug } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Home",
   description:
-    "Discover thoughtful writing on tech, lifestyle, and India-focused consumer issues. Redsols Blog offers practical perspectives for readers who want clearer digital life guidance.",
+    "Discover thoughtful writing on tech, lifestyle, and consumer issues. Redsols Blog offers practical perspectives for readers who want clearer digital life guidance.",
   alternates: {
     canonical: "https://blog.redsols.com",
   },
   openGraph: {
-    title: "Blog by Redsols - Tech, Lifestyle & India Issues",
+    title: "Blog by Redsols - Tech, Lifestyle & Consumer Issues",
     description:
-      "Discover thoughtful writing on tech, lifestyle, and India-focused consumer issues.",
+      "Discover thoughtful writing on tech, lifestyle, and consumer issues.",
     url: "https://blog.redsols.com",
     siteName: "Blog by Redsols",
     type: "website",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog by Redsols - Tech, Lifestyle & India Issues",
+    title: "Blog by Redsols - Tech, Lifestyle & Consumer Issues",
     description:
-      "Discover thoughtful writing on tech, lifestyle, and India-focused consumer issues.",
+      "Discover thoughtful writing on tech, lifestyle, and consumer issues.",
     images: ["/android-chrome-512x512.png"],
   },
 };
@@ -51,10 +51,6 @@ const getCategoryDescription = (category: string) => {
 
   if (category === "Issues") {
     return "Consumer problems, policy gaps, and service failures that deserve attention.";
-  }
-
-  if (category === "India") {
-    return "India-specific consumer and digital-life issues with clear, practical impact.";
   }
 
   if (category === "Uncategorized") {
@@ -79,18 +75,12 @@ const formatDate = (date?: string) => {
 export default async function Home() {
   const data: Blog[] = await getData();
 
-  const isIndiaPost = (blog: Blog) =>
-    blog.region?.toLowerCase() === "india" || blog.category?.toLowerCase() === "india";
-
-  const indiaPosts = data.filter(isIndiaPost);
-
   const blogsByCategory = data.reduce(
     (acc: Record<string, Blog[]>, blog: Blog) => {
-      if (isIndiaPost(blog)) {
-        return acc;
-      }
-
-      const category = blog.category || "Uncategorized";
+      const category =
+        blog.region?.toLowerCase() === "india" || blog.category?.toLowerCase() === "india"
+          ? "Issues"
+          : blog.category || "Uncategorized";
       if (!acc[category]) {
         acc[category] = [];
       }
@@ -109,7 +99,6 @@ export default async function Home() {
   });
 
   const totalPosts = data.length;
-  const indiaPostCount = indiaPosts.length;
 
   return (
     <MainLayout>
@@ -136,64 +125,24 @@ export default async function Home() {
                 <span>editorial categories</span>
               </div>
               <div className={styles.homeStat}>
-                <strong>{indiaPostCount}</strong>
-                <span>India-focused posts</span>
+                <strong>{blogsByCategory["Issues"]?.length || 0}</strong>
+                <span>consumer issues posts</span>
               </div>
             </div>
           </div>
 
           <aside className={styles.homeHeroPanel}>
-            <span className={styles.homeHeroPanelLabel}>India focus</span>
-            <h2>Consumer issues from India deserve a separate lane.</h2>
+            <span className={styles.homeHeroPanelLabel}>Consumer issues</span>
+            <h2>Consumer problems deserve a separate lane.</h2>
             <p>
-              Posts about telecom, banking, UPI, identity, and other India-specific
-              digital-life problems are collected in one place for easier reading.
+              Posts about telecom, banking, UPI, identity, and other digital-life
+              problems are collected in one place for easier reading.
             </p>
-            <a href="/india" className={styles.homeHeroPanelLink}>
-              Open the India hub
+            <a href="#category-issues" className={styles.homeHeroPanelLink}>
+              Open the issues section
             </a>
           </aside>
         </section>
-
-        {indiaPosts.length > 0 && (
-          <section className={styles.indiaSection} aria-labelledby="india-focus-title">
-            <div className={styles.indiaSectionHeader}>
-              <div>
-                <span className={styles.categoryKicker}>India Focus</span>
-                <h2 id="india-focus-title" className={styles.indiaSectionTitle}>
-                  Consumer problems that affect daily life in India.
-                </h2>
-                <p className={styles.categoryDescription}>
-                  Telecom, banking, and identity issues that need plain-language
-                  explanation and practical pressure for change.
-                </p>
-              </div>
-              <Link href="/india" className={styles.homeHeroPanelLink}>
-                Read all India posts
-              </Link>
-            </div>
-
-            <div className={styles.indiaPostsGrid}>
-              {indiaPosts.slice(0, 3).map((blog: Blog) => (
-                <Link
-                  key={blog._id || blog.title}
-                  href={`/blog/${getBlogSlug(blog)}/`}
-                  className={styles.indiaPostCard}
-                  aria-label={`Read India article: ${blog.title}`}
-                >
-                  <div className={styles.blogCardMeta}>
-                    <span>India</span>
-                    <span>{formatDate(blog.last_updated || blog.created_at)}</span>
-                  </div>
-
-                  <h3 className={styles.blogTitle}>{blog.title}</h3>
-                  <p className={styles.blogDescription}>{blog.description}</p>
-                  <span className={styles.readMore}>Read article</span>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
 
         <div className={styles.categoriesContainer}>
           {sortedCategories.map((category) => (
